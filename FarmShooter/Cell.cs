@@ -1,0 +1,36 @@
+﻿using SFML.Graphics;
+using SFML.System;
+using System;
+
+namespace FarmShooter
+{
+    class Cell : Drawable
+    {
+        public static event EventHandler<Vector2i> CellChanged;
+
+        public Sprite MainSprite;
+        public Vector2i MapCoords;
+
+        public int ID 
+        {
+            get { return _ID; }
+            set 
+            {
+                _ID = value;
+                CellChanged?.Invoke(this, MapCoords);
+            }
+        }
+        private int _ID;
+
+        public Cell(int ID) 
+        {
+            MainSprite = new Sprite(Program.Textures["FieldTile_" + ID.ToString()]);
+            _ID = ID;
+        }
+
+        public void Draw(RenderTarget target, RenderStates states)
+        {
+            target.Draw(MainSprite, states);
+        }
+    }
+}
