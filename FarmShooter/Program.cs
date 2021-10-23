@@ -72,7 +72,8 @@ namespace FarmShooter
                 Cell.CellChanged += (o, e) =>
                 {
                     Map[1, e.X, e.Y] = ((Cell)o).ID;
-                    ((Cell)o).MainSprite.Texture = Textures["FieldTile_" + ((Cell)o).ID.ToString()];
+                    Field[e.X, e.Y] = new Cell(((Cell)o).ID);
+                    Field[e.X, e.Y].MainSprite.Position = new Vector2f(e.X * Field[e.X, e.Y].MainSprite.Texture.Size.X, e.Y * Field[e.X, e.Y].MainSprite.Texture.Size.Y);
                 };
             }
             else 

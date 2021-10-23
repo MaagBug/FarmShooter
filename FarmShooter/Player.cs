@@ -9,12 +9,18 @@ namespace FarmShooter
     {
         public Entity MainEntity;
 
+        public bool Paused = false;
+
         public RectangleShape CellSelectionMark = new RectangleShape() { OutlineThickness = 9, OutlineColor = new Color(255, 255, 255), FillColor = new Color(0, 0, 0, 0) };
         public Cell SelectedCell;
+
+        public Handheld CurrentHandheld;
+        public ImagePoint Handle;
 
         public void Start() 
         {
             Program.OtherDrawable.Add(CellSelectionMark);
+            Handle = new ImagePoint() { Point = MainEntity.Sprite.Position + new Vector2f(100, 0) };
         }
 
         public void Update() 
