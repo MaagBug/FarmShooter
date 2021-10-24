@@ -1,0 +1,1 @@
+[{"ID":0,"Name":"Iron Axe","TextureName":"Base_Axe_Iron","Efficiency":30}]
