@@ -87,6 +87,8 @@ namespace FarmShooter
             Player Player = new Player() { MainEntity = new Entity(Textures["Player"]) { Speed = 500 }};
             Player.Start();
 
+            Handheld.LoadHandhelds("");
+
             Random rand = new Random();
             for (int i = 0; i < Field.GetUpperBound(0) + 1; ++i) 
             {
