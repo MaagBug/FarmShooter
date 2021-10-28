@@ -14,7 +14,11 @@ namespace FarmShooter
     {
         public static Socket MainSocket;
 
+        public static List<Keyboard.Key> NumKeys = new List<Keyboard.Key> { Keyboard.Key.Num1, Keyboard.Key.Num2, Keyboard.Key.Num3, Keyboard.Key.Num4, Keyboard.Key.Num5, Keyboard.Key.Num6, Keyboard.Key.Num7, Keyboard.Key.Num8, Keyboard.Key.Num9, };
+
         public static DTRenderWindow MainWindow = new DTRenderWindow(new VideoMode(800, 600), "test");
+        public static View MainView = new View(new FloatRect(0, 0, MainWindow.Size.X, MainWindow.Size.Y));
+        public static View UIView = new View(new FloatRect(0, 0, MainWindow.Size.X, MainWindow.Size.Y));
 
         public static Dictionary<string, Texture> Textures = new Dictionary<string, Texture>();
 
@@ -22,8 +26,8 @@ namespace FarmShooter
 
         public static int[,,] Map = new int[3, 20, 20];
         public static Cell[,] Field = new Cell[20, 20];
+        public static Player Player;
 
-        public static List<Drawable> OtherDrawable = new List<Drawable>();
         public static float Zoom = 1;
 
         static void LoadTextures() 
@@ -65,34 +69,17 @@ namespace FarmShooter
             }
         }
 
-        static void MainGameScreen() 
+        static void Menu() 
         {
-            if (MainSocket == null)
-            {
-                Cell.CellChanged += (o, e) =>
-                {
-                    Map[1, e.X, e.Y] = ((Cell)o).ID;
-                    Field[e.X, e.Y] = new Cell(((Cell)o).ID);
-                    Field[e.X, e.Y].MainSprite.Position = new Vector2f(e.X * Field[e.X, e.Y].MainSprite.Texture.Size.X, e.Y * Field[e.X, e.Y].MainSprite.Texture.Size.Y);
-                };
-            }
-            else 
-            {
-                Cell.CellChanged += (o, e) =>
-                {
+            PrepareSinglePlayer();
+        }
 
-                };
-            }
-
-            Player Player = new Player() { MainEntity = new Entity(Textures["Player"]) { Speed = 500 }};
-            Player.Start();
-
-            Handheld.LoadHandhelds("");
-
+        static void PrepareSinglePlayer() 
+        {
             Random rand = new Random();
-            for (int i = 0; i < Field.GetUpperBound(0) + 1; ++i) 
+            for (int i = 0; i < Field.GetUpperBound(0) + 1; ++i)
             {
-                for (int k = 0; k < Field.GetUpperBound(1) + 1; ++k) 
+                for (int k = 0; k < Field.GetUpperBound(1) + 1; ++k)
                 {
                     Map[1, i, k] = rand.Next(0, 4);
                     Field[i, k] = new Cell(Map[1, i, k]) { MapCoords = new Vector2i(i, k) };
@@ -100,12 +87,26 @@ namespace FarmShooter
                 }
             }
 
+            Cell.CellUpdated += (o, e) => Map[1, e.X, e.Y] = ((Cell)o).ID;
+        }
+
+        static void PrepaseMultiPlayer() { }
+
+        static void MainGameScreen() 
+        {
+            Player = new Player() { MainEntity = new Entity(Textures["Player"]) { Speed = 500 }};
+            Player.Start();
+
+            Handheld.LoadHandhelds("");
+
+            
+
             while (MainWindow.IsOpen) 
             {
                 MainWindow.DispatchEvents();
                 MainWindow.UpdateDeltaTime();
 
-                TrueMousePosition = ((Vector2f)Mouse.GetPosition(MainWindow) - MainWindow.GetView().Size / Zoom) * Zoom + MainWindow.GetView().Center + MainWindow.GetView().Size / 2;
+                TrueMousePosition = ((Vector2f)Mouse.GetPosition(MainWindow) - (Vector2f)MainWindow.Size) * Zoom + MainWindow.GetView().Center + MainWindow.GetView().Size / 2;
 
                 Player.Update();
 
@@ -116,12 +117,13 @@ namespace FarmShooter
                     MainWindow.Draw(tile);
                 }
 
-                foreach (var item in OtherDrawable) 
-                {
-                    MainWindow.Draw(item);
-                }
+                MainWindow.Draw(Player);
 
-                MainWindow.Draw(Player.MainEntity);
+                MainWindow.SetView(UIView);
+
+                MainWindow.Draw(new RectangleShape(new Vector2f(100, 200)) { FillColor = new Color(255, 0, 0) });
+
+                MainWindow.SetView(MainView);
 
                 MainWindow.Display();
             }
@@ -133,15 +135,17 @@ namespace FarmShooter
             MainWindow.MouseWheelScrolled += (o, e) =>
             {
                 if ((e.Delta > 0 && Zoom < 2) || Zoom >= 2) Zoom += e.Delta;
-                MainWindow.SetView(new View(MainWindow.GetView()) { Size = ((Vector2f)MainWindow.Size) * Zoom });
+                MainView.Size = ((Vector2f)MainWindow.Size) * Zoom;
             };
             MainWindow.Resized += (o, e) => 
             {
-                Zoom = 1;
-                MainWindow.SetView(new View(MainWindow.GetView()) { Size = new Vector2f(e.Width, e.Height) });
+                //Zoom = 1;
+                MainView.Size = new Vector2f(e.Width, e.Height) * Zoom;
+                UIView.Size = new Vector2f(e.Width, e.Height) * Zoom;
             };
 
             LoadingScreen();
+            Menu();
             MainGameScreen();
         }
     }
