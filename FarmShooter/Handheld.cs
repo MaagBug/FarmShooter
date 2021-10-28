@@ -8,7 +8,7 @@ using System.Data;
 
 namespace FarmShooter
 {
-    abstract class Handheld : Drawable
+    abstract class Handheld : Item
     {
         public static List<Handheld> AllHandhelds = new List<Handheld>();
         public static void LoadHandhelds(string json) 
@@ -31,38 +31,26 @@ namespace FarmShooter
             //using StreamWriter writer = new StreamWriter(stream);
             //writer.WriteLine(JsonConvert.SerializeObject(dt));
 
-            DataTable dt = JsonConvert.DeserializeObject<DataTable>(json);
+            //DataTable dt = JsonConvert.DeserializeObject<DataTable>(json);
 
-            for (int i = 0; i < dt.Rows.Count; ++i) 
-            {
-                //AllHandhelds.Add();
-            }
+            //for (int i = 0; i < dt.Rows.Count; ++i) 
+            //{
+            //    AllHandhelds.Add();
+            //}
         }
-
-        public static event EventHandler<int> HandheldChanged;
 
         public Sprite MainSprite;
-        public string Name;
 
-        public int ID 
-        {
-            get { return _ID; }
-            set 
-            {
-                _ID = value;
-                HandheldChanged?.Invoke(this, _ID);
-            }
-        }
-        private int _ID;
+        public int ID;
 
         public Player Owner;
 
-        public Handheld(int id, string name, string text_name) 
+        public Handheld(int id, string name, string text_name, string inv_text_name) : base(name, inv_text_name)
         {
-            
+            ID = id;
+            MainSprite = new Sprite(Program.Textures[text_name]);
         }
 
-        public abstract void Draw(RenderTarget target, RenderStates states);
         public abstract void Update();
     }
 }

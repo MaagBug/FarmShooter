@@ -14,7 +14,7 @@ namespace FarmShooter
             Sprite = new Sprite() { Texture = text, Origin = (Vector2f)(text.Size / 2) };
         }
 
-        public void Draw(RenderTarget target, RenderStates states)
+        public virtual void Draw(RenderTarget target, RenderStates states)
         {
             target.Draw(Sprite, states);
         }

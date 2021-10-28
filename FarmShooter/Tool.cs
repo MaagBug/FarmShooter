@@ -11,6 +11,11 @@ namespace FarmShooter
         public ToolType Type;
         public float Efficiency;
 
+        public Tool(int id, string name, string text_name, string inv_text_name, ToolType type) : base(id, name, text_name, inv_text_name) 
+        {
+            Type = type;
+        }
+
         public override void Draw(RenderTarget target, RenderStates states)
         {
             target.Draw(MainSprite, states);
