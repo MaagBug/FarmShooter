@@ -6,7 +6,7 @@ namespace FarmShooter
 {
     class Cell : Drawable
     {
-        public static event EventHandler<Vector2i> CellChanged;
+        public static event EventHandler<Vector2i> CellUpdated;
 
         public Sprite MainSprite;
         public Vector2i MapCoords;
@@ -17,7 +17,9 @@ namespace FarmShooter
             set 
             {
                 _ID = value;
-                CellChanged?.Invoke(this, MapCoords);
+                MainSprite.Texture = Program.Textures["FieldTile_" + ID.ToString()];
+
+                CellUpdated?.Invoke(this, MapCoords);
             }
         }
         private int _ID;
