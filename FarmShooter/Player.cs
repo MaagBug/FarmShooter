@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
 
 namespace FarmShooter
 {
-    class Player
+    class Player : Drawable
     {
         public Entity MainEntity;
+
+        public Item[,] Inventory = new Item[3, 9];
+        public Item SelectedItem;
 
         public bool Paused = false;
 
@@ -17,10 +21,19 @@ namespace FarmShooter
         public Handheld CurrentHandheld;
         public ImagePoint Handle;
 
+        public void Draw(RenderTarget target, RenderStates states)
+        {
+            target.Draw(CellSelectionMark);
+            target.Draw(MainEntity);
+            if (CurrentHandheld != null) target.Draw(CurrentHandheld);
+        }
+
         public void Start() 
         {
-            Program.OtherDrawable.Add(CellSelectionMark);
-            Handle = new ImagePoint() { Point = MainEntity.Sprite.Position + new Vector2f(100, 0) };
+            Handle = new ImagePoint() { Point = new Vector2f(0, 0) };
+            Inventory[0, 0] = new Tool(0, "Axe", "Base_Axe_Iron", "", ToolType.Axe) { Owner = this };
+            Inventory[0, 1] = new Tool(0, "Hoe", "Base_Hoe_Iron", "", ToolType.Hoe) { Owner = this };
+            Inventory[0, 2] = new Tool(0, "Pickaxe", "Base_Pickaxe_Iron", "", ToolType.Pickaxe) { Owner = this };
         }
 
         public void Update() 
@@ -33,6 +46,16 @@ namespace FarmShooter
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.A)) horiz_input = -1;
             if (Keyboard.IsKeyPressed(Keyboard.Key.D)) horiz_input = 1;
+
+            for (int i = 0; i < 9; ++i)
+            {
+                if (Keyboard.IsKeyPressed(Program.NumKeys[i])) 
+                {
+                    SelectedItem = Inventory[0, i];
+                    if (SelectedItem is Handheld) CurrentHandheld = SelectedItem as Handheld;
+                    break;
+                }
+            }
 
             MainEntity.Sprite.Position += new Vector2f(horiz_input, vert_input).Normalized() * MainEntity.Speed * Program.MainWindow.DeltaTime.AsSeconds();
 
@@ -60,12 +83,15 @@ namespace FarmShooter
                 }
             }
 
+            if (CurrentHandheld != null) CurrentHandheld.Update();
+
             if (Mouse.IsButtonPressed(Mouse.Button.Left) && SelectedCell != null) 
             {
                 SelectedCell.ID = 1;
             }
 
-            Program.MainWindow.SetView(new View(Program.MainWindow.GetView()) { Center = MainEntity.Sprite.Position });
+            Program.MainView.Center = MainEntity.Sprite.Position;
+            Program.MainWindow.SetView(Program.MainView);
         }
     }
 }
