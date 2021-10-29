@@ -1,0 +1,11 @@
+C:\Users\AWAWAWAAWW\source\repos\FarmShooter\BasicSFMLUI\bin\Debug\net5.0\BasicSFMLUI.deps.json
+C:\Users\AWAWAWAAWW\source\repos\FarmShooter\BasicSFMLUI\bin\Debug\net5.0\BasicSFMLUI.dll
+C:\Users\AWAWAWAAWW\source\repos\FarmShooter\BasicSFMLUI\bin\Debug\net5.0\ref\BasicSFMLUI.dll
+C:\Users\AWAWAWAAWW\source\repos\FarmShooter\BasicSFMLUI\bin\Debug\net5.0\BasicSFMLUI.pdb
+C:\Users\AWAWAWAAWW\source\repos\FarmShooter\BasicSFMLUI\obj\Debug\net5.0\BasicSFMLUI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\AWAWAWAAWW\source\repos\FarmShooter\BasicSFMLUI\obj\Debug\net5.0\BasicSFMLUI.AssemblyInfoInputs.cache
+C:\Users\AWAWAWAAWW\source\repos\FarmShooter\BasicSFMLUI\obj\Debug\net5.0\BasicSFMLUI.AssemblyInfo.cs
+C:\Users\AWAWAWAAWW\source\repos\FarmShooter\BasicSFMLUI\obj\Debug\net5.0\BasicSFMLUI.csproj.CoreCompileInputs.cache
+C:\Users\AWAWAWAAWW\source\repos\FarmShooter\BasicSFMLUI\obj\Debug\net5.0\BasicSFMLUI.dll
+C:\Users\AWAWAWAAWW\source\repos\FarmShooter\BasicSFMLUI\obj\Debug\net5.0\ref\BasicSFMLUI.dll
+C:\Users\AWAWAWAAWW\source\repos\FarmShooter\BasicSFMLUI\obj\Debug\net5.0\BasicSFMLUI.pdb
