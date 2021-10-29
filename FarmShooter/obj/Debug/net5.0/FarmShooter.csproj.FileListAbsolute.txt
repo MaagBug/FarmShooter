@@ -78,3 +78,5 @@ C:\Users\AWAWAWAAWW\source\repos\FarmShooter\FarmShooter\obj\Debug\net5.0\ref\Fa
 C:\Users\AWAWAWAAWW\source\repos\FarmShooter\FarmShooter\obj\Debug\net5.0\FarmShooter.pdb
 C:\Users\AWAWAWAAWW\source\repos\FarmShooter\FarmShooter\obj\Debug\net5.0\FarmShooter.genruntimeconfig.cache
 C:\Users\AWAWAWAAWW\source\repos\FarmShooter\FarmShooter\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\AWAWAWAAWW\source\repos\FarmShooter\FarmShooter\bin\Debug\net5.0\BasicSFMLUI.dll
+C:\Users\AWAWAWAAWW\source\repos\FarmShooter\FarmShooter\bin\Debug\net5.0\BasicSFMLUI.pdb

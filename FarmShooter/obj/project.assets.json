@@ -310,6 +310,19 @@
         "runtime": {
           "lib/netstandard2.0/SFML.Window.dll": {}
         }
+      },
+      "BasicSFMLUI/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "SFML.Net": "2.5.0"
+        },
+        "compile": {
+          "bin/placeholder/BasicSFMLUI.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BasicSFMLUI.dll": {}
+        }
       }
     }
   },
@@ -472,10 +485,16 @@
         "sfml.window.2.5.0.nupkg.sha512",
         "sfml.window.nuspec"
       ]
+    },
+    "BasicSFMLUI/1.0.0": {
+      "type": "project",
+      "path": "../BasicSFMLUI/BasicSFMLUI.csproj",
+      "msbuildProject": "../BasicSFMLUI/BasicSFMLUI.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "BasicSFMLUI >= 1.0.0",
       "Newtonsoft.Json >= 13.0.1",
       "SFML.Net >= 2.5.0"
     ]
@@ -514,7 +533,11 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\AWAWAWAAWW\\source\\repos\\FarmShooter\\BasicSFMLUI\\BasicSFMLUI.csproj": {
+              "projectPath": "C:\\Users\\AWAWAWAAWW\\source\\repos\\FarmShooter\\BasicSFMLUI\\BasicSFMLUI.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

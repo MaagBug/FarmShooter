@@ -6,7 +6,7 @@ using SFML.System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Net.Sockets;
-using System.Net;
+using BasicSFMLUI;
 
 namespace FarmShooter
 {
@@ -19,6 +19,8 @@ namespace FarmShooter
         public static DTRenderWindow MainWindow = new DTRenderWindow(new VideoMode(800, 600), "test");
         public static View MainView = new View(new FloatRect(0, 0, MainWindow.Size.X, MainWindow.Size.Y));
         public static View UIView = new View(new FloatRect(0, 0, MainWindow.Size.X, MainWindow.Size.Y));
+
+        public static Canvas UICanvas = new Canvas();
 
         public static Dictionary<string, Texture> Textures = new Dictionary<string, Texture>();
 
@@ -94,12 +96,12 @@ namespace FarmShooter
 
         static void MainGameScreen() 
         {
+            UICanvas.Items.Add(new(new Vector2f(0, 0), new RectangleShape(new Vector2f(100, 200)) { FillColor = new Color(255, 0, 0) }));
+
             Player = new Player() { MainEntity = new Entity(Textures["Player"]) { Speed = 500 }};
             Player.Start();
 
             Handheld.LoadHandhelds("");
-
-            
 
             while (MainWindow.IsOpen) 
             {
@@ -121,7 +123,7 @@ namespace FarmShooter
 
                 MainWindow.SetView(UIView);
 
-                MainWindow.Draw(new RectangleShape(new Vector2f(100, 200)) { FillColor = new Color(255, 0, 0) });
+                MainWindow.Draw(UICanvas);
 
                 MainWindow.SetView(MainView);
 
@@ -139,9 +141,10 @@ namespace FarmShooter
             };
             MainWindow.Resized += (o, e) => 
             {
-                //Zoom = 1;
                 MainView.Size = new Vector2f(e.Width, e.Height) * Zoom;
-                UIView.Size = new Vector2f(e.Width, e.Height) * Zoom;
+                UIView.Size = new Vector2f(e.Width, e.Height);
+                UIView.Center = new Vector2f(e.Width / 2, e.Height / 2);
+                UICanvas.SetPlaneSize(new Vector2f(e.Width, e.Height));
             };
 
             LoadingScreen();
