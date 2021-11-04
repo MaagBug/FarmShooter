@@ -6,12 +6,16 @@ using SFML.Window;
 
 namespace FarmShooter
 {
+    enum PlayerState { None, Paused, Texting, Crafting }
+
     class Player : Drawable
     {
         public Entity MainEntity;
 
         public Item[,] Inventory = new Item[3, 9];
         public Item SelectedItem;
+
+        public PlayerState State = PlayerState.None;
 
         public bool Paused = false;
 
