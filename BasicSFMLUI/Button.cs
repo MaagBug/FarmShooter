@@ -8,41 +8,27 @@ namespace BasicSFMLUI
     public class Button
     {
         public event EventHandler Clicked;
+        public bool IsBeingPressed = false;
 
-        public Sprite MainSprite;
-
-        public Texture MainTexture;
-        public Texture HoverTexture;
-        public Texture ClickTexture;
+        public FloatRect BoundingBox;
 
         public Window ContainingWindow;
 
-        private bool is_being_pressed = false;
-
-        public Button(Texture main, Texture hover, Texture click) 
+        public Button(Window cw, FloatRect bb) 
         {
-            MainTexture = main;
-            HoverTexture = hover;
-            ClickTexture = click;
+            ContainingWindow = cw;
 
-            MainSprite = new Sprite(MainTexture);
+            BoundingBox = bb;
 
             ContainingWindow.MouseButtonPressed += (o, e) => 
             {
-                if (MainSprite.GetGlobalBounds().Contains(e.X, e.Y)) is_being_pressed = true;
-                MainSprite.Texture = ClickTexture;
+                if (BoundingBox.Contains(e.X, e.Y)) IsBeingPressed = true;
             };
 
             ContainingWindow.MouseButtonReleased += (o, e) => 
             {
-                if (MainSprite.GetGlobalBounds().Contains(e.X, e.Y) && is_being_pressed) Clicked?.Invoke(this, new EventArgs());
-                MainSprite.Texture = MainTexture;
-                is_being_pressed = false;
-            };
-
-            ContainingWindow.MouseMoved += (o, e) => 
-            {
-                if (!is_being_pressed && MainSprite.GetGlobalBounds().Contains(e.X, e.Y)) MainSprite.Texture = MainTexture;
+                if (BoundingBox.Contains(e.X, e.Y) && IsBeingPressed) Clicked?.Invoke(this, new EventArgs());
+                IsBeingPressed = false;
             };
         }
     }

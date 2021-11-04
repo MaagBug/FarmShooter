@@ -9,3 +9,4 @@ C:\Users\AWAWAWAAWW\source\repos\FarmShooter\BasicSFMLUI\obj\Debug\net5.0\BasicS
 C:\Users\AWAWAWAAWW\source\repos\FarmShooter\BasicSFMLUI\obj\Debug\net5.0\BasicSFMLUI.dll
 C:\Users\AWAWAWAAWW\source\repos\FarmShooter\BasicSFMLUI\obj\Debug\net5.0\ref\BasicSFMLUI.dll
 C:\Users\AWAWAWAAWW\source\repos\FarmShooter\BasicSFMLUI\obj\Debug\net5.0\BasicSFMLUI.pdb
+C:\Users\AWAWAWAAWW\source\repos\FarmShooter\BasicSFMLUI\obj\Debug\net5.0\BasicSFMLUI.csproj.AssemblyReference.cache
