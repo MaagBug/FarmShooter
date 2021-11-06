@@ -11,7 +11,7 @@ namespace FarmShooter
         public Item(string name, string inv_text_name) 
         {
             Name = name;
-            //InventorySprite = new Sprite(Program.Textures[inv_text_name]);
+            InventorySprite = new Sprite(Program.Textures[inv_text_name]);
         }
 
         public abstract void Draw(RenderTarget target, RenderStates states);

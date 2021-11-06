@@ -12,7 +12,7 @@ namespace FarmShooter
     {
         public Entity MainEntity;
 
-        public Item[,] Inventory = new Item[3, 9];
+        public Item[,] Inventory = new Item[3, 8];
         public Item SelectedItem;
 
         public PlayerState State = PlayerState.None;
@@ -35,9 +35,11 @@ namespace FarmShooter
         public void Start() 
         {
             Handle = new ImagePoint() { Point = new Vector2f(0, 0) };
-            Inventory[0, 0] = new Tool(0, "Axe", "Base_Axe_Iron", "", ToolType.Axe) { Owner = this };
-            Inventory[0, 1] = new Tool(0, "Hoe", "Base_Hoe_Iron", "", ToolType.Hoe) { Owner = this };
-            Inventory[0, 2] = new Tool(0, "Pickaxe", "Base_Pickaxe_Iron", "", ToolType.Pickaxe) { Owner = this };
+            Inventory[0, 0] = new Tool(0, "Axe", "Base_Axe_Iron", "Base_Axe_Iron_Inventory", ToolType.Axe) { Owner = this };
+            Inventory[0, 1] = new Tool(0, "Hoe", "Base_Hoe_Iron", "Base_Hoe_Iron_Inventory", ToolType.Hoe) { Owner = this };
+            Inventory[0, 2] = new Tool(0, "Pickaxe", "Base_Pickaxe_Iron", "Base_Pickaxe_Iron_Inventory", ToolType.Pickaxe) { Owner = this };
+
+            SelectedItem = Inventory[0, 0];
         }
 
         public void Update() 
