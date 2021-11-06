@@ -173,20 +173,18 @@ namespace FarmShooter
         {
             TransformableVertexArray UIInvenotyBar = new TransformableVertexArray();
 
-            UIInvenotyBar.Vertexes.Append(new Vertex(new Vector2f(0, 0), new Color(0, 0, 0, 0)));
-            UIInvenotyBar.Vertexes.Append(new Vertex(new Vector2f(890, 0), new Color(0, 0, 0, 0)));
-            UIInvenotyBar.Vertexes.Append(new Vertex(new Vector2f(890, 120), new Color(0, 0, 0, 255)));
-            UIInvenotyBar.Vertexes.Append(new Vertex(new Vector2f(0, 120), new Color(0, 0, 0, 255)));
+            UIInvenotyBar.Vertexes.Append(new Vertex(new Vector2f(0, 0), new Color(40, 40, 40, 120)));
+            UIInvenotyBar.Vertexes.Append(new Vertex(new Vector2f(800, 0), new Color(40, 40, 40, 120)));
+            UIInvenotyBar.Vertexes.Append(new Vertex(new Vector2f(800, 100), new Color(40, 40, 40, 255)));
+            UIInvenotyBar.Vertexes.Append(new Vertex(new Vector2f(0, 100), new Color(40, 40, 40, 255)));
             UIInvenotyBar.Vertexes.PrimitiveType = PrimitiveType.Quads;
-
-            UIInvenotyBar.Origin = new Vector2f(445, 120);
+            UIInvenotyBar.Origin = new Vector2f(400, 100);
 
             UICanvas.Items.Add(new(new Vector2f(0.5F, 1), UIInvenotyBar));
 
-            List<RectangleShape> UIInventoryCells = new List<RectangleShape>()
-            {
-                new RectangleShape(new Vector2f(100, 100)) { FillColor = new Color(0, 0, 0, 0), OutlineColor = new Color(160, 160, 160), OutlineThickness = 7 }
-            };
+            RectangleShape UIInventoryCell = new RectangleShape(new Vector2f(80, 80)) { FillColor = new Color(0, 0, 0, 0), OutlineColor = new Color(160, 160, 160), OutlineThickness = -7 };
+
+            Sprite UIInventoryItem;
 
             UICanvas.SetPlaneSize((Vector2f)MainWindow.Size);
 
@@ -216,6 +214,22 @@ namespace FarmShooter
                 MainWindow.SetView(UIView);
 
                 MainWindow.Draw(UICanvas);
+
+                for (int i = 0; i < 8; ++i) 
+                {
+                    UIInventoryCell.Position = UIInvenotyBar.Position - UIInvenotyBar.Origin + new Vector2f(100 * i + ((100 - 80) / 2), 10);
+
+                    UIInventoryCell.OutlineColor = new Color(160, 160, 160);
+                    if (Player.Inventory[0, i] == Player.SelectedItem) UIInventoryCell.OutlineColor = new Color(200, 200, 200);
+
+                    MainWindow.Draw(UIInventoryCell);
+
+                    if (Player.Inventory[0, i] != null)
+                    {
+                        UIInventoryItem = new Sprite(Player.Inventory[0, i].InventorySprite) { Position = UIInventoryCell.Position - new Vector2f(UIInventoryCell.OutlineThickness, UIInventoryCell.OutlineThickness) };
+                        MainWindow.Draw(UIInventoryItem);
+                    }
+                }
 
                 MainWindow.SetView(MainView);
 
