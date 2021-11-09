@@ -1,7 +1,4 @@
-﻿using System;
-using SFML.Graphics;
-
-namespace FarmShooter
+﻿namespace FarmShooter
 {
     abstract class Item : Drawable
     {

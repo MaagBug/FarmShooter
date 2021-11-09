@@ -1,7 +1,4 @@
-﻿using SFML.System;
-using System;
-
-namespace FarmShooter
+﻿namespace FarmShooter
 {
     public static class Vector2Extension
     {

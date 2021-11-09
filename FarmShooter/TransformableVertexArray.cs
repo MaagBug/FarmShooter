@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using SFML.Graphics;
-using SFML.System;
-
-namespace FarmShooter
+﻿namespace FarmShooter
 {
     class TransformableVertexArray : Transformable, Drawable
     {

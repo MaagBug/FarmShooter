@@ -1,8 +1,4 @@
-﻿using System;
-using SFML.Graphics;
-using SFML.System;
-
-namespace FarmShooter
+﻿namespace FarmShooter
 {
     class Entity : Drawable
     {

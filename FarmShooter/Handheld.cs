@@ -1,12 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using SFML.Graphics;
-using Newtonsoft.Json;
-using SFML.System;
-using System.Data;
-
-namespace FarmShooter
+﻿namespace FarmShooter
 {
     abstract class Handheld : Item
     {

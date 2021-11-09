@@ -1,8 +1,4 @@
-﻿using System;
-using SFML.System;
-using SFML.Graphics;
-
-namespace FarmShooter
+﻿namespace FarmShooter
 {
     enum ToolType { Hoe, Axe, Pickaxe };
 

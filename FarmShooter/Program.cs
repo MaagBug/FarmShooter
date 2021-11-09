@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using SFML.Graphics;
-using SFML.Window;
-using SFML.System;
-using System.IO;
-using System.Threading.Tasks;
-using System.Net.Sockets;
-using BasicSFMLUI;
-using System.Linq;
+﻿global using SFML.Graphics;
+global using SFML.Window;
+global using SFML.System;
+global using System;
+global using System.Collections.Generic;
+global using System.IO;
+global using System.Threading.Tasks;
+global using System.Net.Sockets;
+global using BasicSFMLUI;
+global using System.Linq;
 
 namespace FarmShooter
 {
@@ -81,6 +81,8 @@ namespace FarmShooter
         static void Menu() 
         {
             bool in_menu = true;
+
+            MainWindow.SetActive(true);
 
             MainWindow.Closed += (o, e) => { MainWindow.Close(); };
             MainWindow.MouseWheelScrolled += (o, e) =>
@@ -239,6 +241,8 @@ namespace FarmShooter
 
         static void Main()
         {
+            MainWindow.SetActive(false);
+
             LoadingScreen();
             Menu();
             MainGameScreen();

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using SFML.Graphics;
-using SFML.System;
-using SFML.Window;
-
-namespace FarmShooter
+﻿namespace FarmShooter
 {
     enum PlayerState { None, Paused, Texting, Crafting }
 

@@ -1,7 +1,4 @@
-﻿using System;
-using SFML.System;
-
-namespace FarmShooter
+﻿namespace FarmShooter
 {
     class ImagePoint
     {

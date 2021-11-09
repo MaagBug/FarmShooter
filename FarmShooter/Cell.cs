@@ -1,8 +1,4 @@
-﻿using SFML.Graphics;
-using SFML.System;
-using System;
-
-namespace FarmShooter
+﻿namespace FarmShooter
 {
     class Cell : Drawable
     {
@@ -30,7 +26,7 @@ namespace FarmShooter
             _ID = ID;
         }
 
-        public void Draw(RenderTarget target, RenderStates states)
+        public virtual void Draw(RenderTarget target, RenderStates states)
         {
             target.Draw(MainSprite, states);
         }
