@@ -87,7 +87,15 @@
 
             if (Mouse.IsButtonPressed(Mouse.Button.Left) && SelectedCell != null) 
             {
-                SelectedCell.ID = 1;
+                if (CurrentHandheld != null && CurrentHandheld is Tool) 
+                {
+                    switch (((Tool)CurrentHandheld).Type) 
+                    {
+                        case ToolType.Hoe:
+                            SelectedCell.ID = 4;
+                            break;
+                    }
+                }
             }
 
             Program.MainView.Center = MainEntity.Sprite.Position;
