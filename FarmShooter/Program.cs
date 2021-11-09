@@ -56,6 +56,8 @@ namespace FarmShooter
 
         static void LoadingScreen() 
         {
+            MainWindow.SetActive(true);
+
             var load = Task.Run(LoadTexturesAndResources);
 
             CircleShape load_shape = new CircleShape() { Radius = 30, Origin = new Vector2f(30, 30), Position = new Vector2f(400, 300), OutlineThickness = 5, OutlineColor = new Color(0, 0, 0) };
@@ -81,8 +83,6 @@ namespace FarmShooter
         static void Menu() 
         {
             bool in_menu = true;
-
-            MainWindow.SetActive(true);
 
             MainWindow.Closed += (o, e) => { MainWindow.Close(); };
             MainWindow.MouseWheelScrolled += (o, e) =>
@@ -153,7 +153,7 @@ namespace FarmShooter
             PrepareSinglePlayer();
         }
 
-        static void PrepareSinglePlayer() 
+        static void PrepareSinglePlayer()
         {
             Random rand = new Random();
             for (int i = 0; i < Field.GetUpperBound(0) + 1; ++i)
@@ -166,7 +166,19 @@ namespace FarmShooter
                 }
             }
 
-            Cell.CellUpdated += (o, e) => Map[1, e.X, e.Y] = ((Cell)o).ID;
+            Cell.CellUpdated += (o, e) =>
+            {
+                Map[1, e.X, e.Y] = ((Cell)o).ID;
+
+                if (Map[1, e.X, e.Y] == 4)
+                {
+                    FarmCell q = new FarmCell();
+                    q.MainSprite.Position = new Vector2f(100 * e.X, 100 * e.Y);
+                    q.MapCoords = e;
+
+                    Field[e.X, e.Y] = q;
+                }
+            };
         }
 
         static void PrepaseMultiPlayer() { }
@@ -208,7 +220,10 @@ namespace FarmShooter
 
                 foreach (var tile in Field)
                 {
-                    MainWindow.Draw(tile);
+                    if (tile.MainSprite.GetGlobalBounds().Intersects(new FloatRect(MainView.Center - MainView.Size / 2, MainView.Size)))
+                    {
+                        MainWindow.Draw(tile);
+                    }
                 }
 
                 MainWindow.Draw(Player);
