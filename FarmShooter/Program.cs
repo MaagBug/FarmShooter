@@ -8,6 +8,8 @@ global using System.Threading.Tasks;
 global using System.Net.Sockets;
 global using BasicSFMLUI;
 global using System.Linq;
+global using Newtonsoft.Json;
+global using System.Data;
 
 namespace FarmShooter
 {
@@ -202,10 +204,11 @@ namespace FarmShooter
 
             UICanvas.SetPlaneSize((Vector2f)MainWindow.Size);
 
+            FileStream file = new FileStream("test.json", FileMode.Open);
+            Handheld.LoadHandhelds(new StreamReader(file).ReadToEnd());
+
             Player = new Player() { MainEntity = new Entity(Textures["Player"]) { Speed = 500 }};
             Player.Start();
-
-            Handheld.LoadHandhelds("");
 
             while (MainWindow.IsOpen) 
             {
@@ -261,6 +264,26 @@ namespace FarmShooter
             LoadingScreen();
             Menu();
             MainGameScreen();
+
+            //using FileStream file = new FileStream("test.json", FileMode.OpenOrCreate);
+            //using StreamReader reader = new StreamReader(file);
+            //using StreamWriter writer = new StreamWriter(file);
+
+            //DataTable table = new DataTable();
+            //table.Columns.Add("ID", typeof(int));
+            //table.Columns.Add("HandheldType", typeof(string));
+            //table.Columns.Add("TextureName", typeof(string));
+            //table.Columns.Add("InventoryTextureName", typeof(string));
+            //table.Columns.Add("Name", typeof(string));
+            //table.Columns.Add("Material", typeof(MaterialType));
+            //table.Columns.Add("Type", typeof(ToolType));
+            //table.Columns.Add("Efficiency", typeof(int));
+
+            //table.Rows.Add(0, "Tool", "Base_Axe_Iron", "Base_Axe_Iron_Inventory", "Iron Axe", MaterialType.Iron, ToolType.Axe, 30);
+            //table.Rows.Add(1, "Tool", "Base_Hoe_Iron", "Base_Hoe_Iron_Inventory", "Iron Hoe", MaterialType.Iron, ToolType.Hoe, 30);
+            //table.Rows.Add(2, "Tool", "Base_Pickaxe_Iron", "Base_Pickaxe_Iron_Inventory", "Iron Pickaxe", MaterialType.Iron, ToolType.Pickaxe, 30);
+
+            //writer.WriteLine(JsonConvert.SerializeObject(table));
         }
     }
 }
