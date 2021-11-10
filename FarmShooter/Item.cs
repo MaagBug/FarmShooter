@@ -1,10 +1,14 @@
 ﻿namespace FarmShooter
 {
+    enum MaterialType { Wood, Stone, Iron, None }
+
     abstract class Item : Drawable
     {
         public int ID;
         public Sprite InventorySprite;
         public string Name;
+
+        public MaterialType Material;
 
         public int Quantity;
 
@@ -13,10 +17,10 @@
             this.ID = ID;
         }
 
-        public Item(string name, string inv_text_name) 
+        public Item(string name, Texture inv_text) 
         {
             Name = name;
-            InventorySprite = new Sprite(Program.Textures[inv_text_name]);
+            InventorySprite = new Sprite(inv_text);
         }
 
         public abstract void Draw(RenderTarget target, RenderStates states);

@@ -1,0 +1,32 @@
+[
+  {
+    "ID": 0,
+    "HandheldType": "Tool",
+    "TextureName": "Base_Axe_Iron",
+    "InventoryTextureName": "Base_Axe_Iron_Inventory",
+    "Name": "Iron Axe",
+    "Material": 2,
+    "Type": 1,
+    "Efficiency": 30
+  },
+  {
+    "ID": 1,
+    "HandheldType": "Tool",
+    "TextureName": "Base_Hoe_Iron",
+    "InventoryTextureName": "Base_Hoe_Iron_Inventory",
+    "Name": "Iron Hoe",
+    "Material": 2,
+    "Type": 0,
+    "Efficiency": 30
+  },
+  {
+    "ID": 2,
+    "HandheldType": "Tool",
+    "TextureName": "Base_Pickaxe_Iron",
+    "InventoryTextureName": "Base_Pickaxe_Iron_Inventory",
+    "Name": "Iron Pickaxe",
+    "Material": 2,
+    "Type": 2,
+    "Efficiency": 30
+  }
+]

@@ -5,42 +5,26 @@
         public static List<Handheld> AllHandhelds = new List<Handheld>();
         public static void LoadHandhelds(string json) 
         {
-            //DataTable dt = new DataTable();
-            //dt.Columns.Add("ID", Type.GetType("System.Int32"));
-            //dt.Columns.Add("Name", Type.GetType("System.String"));
-            //dt.Columns.Add("TextureName", Type.GetType("System.String"));
-            //dt.Columns.Add("Efficiency", Type.GetType("System.Int32"));
+            DataTable table = JsonConvert.DeserializeObject<DataTable>(json);
 
-            //DataRow dtr = dt.NewRow();
-            //dtr["ID"] = 0;
-            //dtr["Name"] = "Iron Axe";
-            //dtr["TextureName"] = "Base_Axe_Iron";
-            //dtr["Efficiency"] = 30;
-
-            //dt.Rows.Add(dtr);
-
-            //using FileStream stream = new FileStream("text.txt", FileMode.OpenOrCreate);
-            //using StreamWriter writer = new StreamWriter(stream);
-            //writer.WriteLine(JsonConvert.SerializeObject(dt));
-
-            //DataTable dt = JsonConvert.DeserializeObject<DataTable>(json);
-
-            //for (int i = 0; i < dt.Rows.Count; ++i) 
-            //{
-            //    AllHandhelds.Add();
-            //}
+            for (int i = 0; i < table.Rows.Count; ++i) 
+            {
+                if ((string)table.Rows[i].ItemArray[1] == "Tool")
+                {
+                    var row = table.Rows[i];
+                    AllHandhelds.Add(new Tool((int)(long)row.ItemArray[0], (string)row.ItemArray[4], Program.Textures[(string)row.ItemArray[2]], Program.Textures[(string)row.ItemArray[3]], (ToolType)(long)row.ItemArray[6]) { Material = (MaterialType)(long)row.ItemArray[5], Efficiency = (int)(long)row.ItemArray[7] });
+                }
+            }
         }
 
         public Sprite MainSprite;
 
-        public int ID;
-
         public Player Owner;
 
-        public Handheld(int id, string name, string text_name, string inv_text_name) : base(name, inv_text_name)
+        public Handheld(int id, string name, Texture text, Texture inv_text) : base(name, inv_text)
         {
             ID = id;
-            MainSprite = new Sprite(Program.Textures[text_name]);
+            MainSprite = new Sprite(text);
         }
 
         public abstract void Update();

@@ -7,9 +7,15 @@
         public ToolType Type;
         public float Efficiency;
 
-        public Tool(int id, string name, string text_name, string inv_text_name, ToolType type) : base(id, name, text_name, inv_text_name) 
+        public Tool(int id, string name, Texture text, Texture inv_text, ToolType type) : base(id, name, text, inv_text) 
         {
             Type = type;
+        }
+
+        public Tool(int id) : base(id, AllHandhelds[id].Name, AllHandhelds[id].MainSprite.Texture, AllHandhelds[id].InventorySprite.Texture)
+        {
+            Type = ((Tool)AllHandhelds[id]).Type;
+            Efficiency = ((Tool)AllHandhelds[id]).Efficiency;
         }
 
         public override void Draw(RenderTarget target, RenderStates states)
