@@ -28,7 +28,7 @@
 
         public void Start() 
         {
-            Handle = new ImagePoint() { Point = new Vector2f(0, 0) };
+            Handle = new ImagePoint() { Point = new Vector2f(25, 25) };
             Inventory[0, 0] = new Tool(0) { Owner = this };
             Inventory[0, 1] = new Tool(1) { Owner = this };
             Inventory[0, 2] = new Tool(2) { Owner = this };
