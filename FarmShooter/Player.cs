@@ -29,9 +29,9 @@
         public void Start() 
         {
             Handle = new ImagePoint() { Point = new Vector2f(0, 0) };
-            Inventory[0, 0] = new Tool(0, "Axe", "Base_Axe_Iron", "Base_Axe_Iron_Inventory", ToolType.Axe) { Owner = this };
-            Inventory[0, 1] = new Tool(0, "Hoe", "Base_Hoe_Iron", "Base_Hoe_Iron_Inventory", ToolType.Hoe) { Owner = this };
-            Inventory[0, 2] = new Tool(0, "Pickaxe", "Base_Pickaxe_Iron", "Base_Pickaxe_Iron_Inventory", ToolType.Pickaxe) { Owner = this };
+            Inventory[0, 0] = new Tool(0) { Owner = this };
+            Inventory[0, 1] = new Tool(1) { Owner = this };
+            Inventory[0, 2] = new Tool(2) { Owner = this };
 
             SelectedItem = Inventory[0, 0];
         }
