@@ -25,7 +25,7 @@
 
         public override void Update()
         {
-            MainSprite.Position = Owner.Handle.GetImagePoint(Owner.MainEntity.Sprite.Position, Owner.MainEntity.Sprite.Rotation);
+            MainSprite.Position = Owner.Handle.GetImagePoint(Owner.MainEntity.Sprite.Position, 0);
         }
 
         public void Interact(InteractableResource res) 

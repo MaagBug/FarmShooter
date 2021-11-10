@@ -198,7 +198,7 @@ namespace FarmShooter
 
             UICanvas.Items.Add(new(new Vector2f(0.5F, 1), UIInvenotyBar));
 
-            RectangleShape UIInventoryCell = new RectangleShape(new Vector2f(80, 80)) { FillColor = new Color(0, 0, 0, 0), OutlineColor = new Color(160, 160, 160), OutlineThickness = -7 };
+            RectangleShape UIInventoryCell = new RectangleShape(new Vector2f(80, 80)) { FillColor = new Color(0, 0, 0, 0), OutlineColor = new Color(160, 160, 160), OutlineThickness = -8 };
 
             Sprite UIInventoryItem;
 
@@ -246,7 +246,11 @@ namespace FarmShooter
 
                     if (Player.Inventory[0, i] != null)
                     {
-                        UIInventoryItem = new Sprite(Player.Inventory[0, i].InventorySprite) { Position = UIInventoryCell.Position - new Vector2f(UIInventoryCell.OutlineThickness, UIInventoryCell.OutlineThickness) };
+                        UIInventoryItem = new Sprite(Player.Inventory[0, i].InventorySprite) 
+                        { 
+                            Position = UIInventoryCell.Position - new Vector2f(UIInventoryCell.OutlineThickness, UIInventoryCell.OutlineThickness) + new Vector2f(3, 3)
+                        };
+
                         MainWindow.Draw(UIInventoryItem);
                     }
                 }

@@ -25,6 +25,7 @@
         {
             ID = id;
             MainSprite = new Sprite(text);
+            MainSprite.Origin = new Vector2f(30, 53);
         }
 
         public abstract void Update();
