@@ -9,9 +9,9 @@
             
         }
 
-        public void Plant(Plant plant) 
+        public void Plant(int plant_id) 
         {
-            PlantedPlant = new Plant(plant);
+            PlantedPlant = new Plant(plant_id);
         }
 
         public override void Draw(RenderTarget target, RenderStates states)
