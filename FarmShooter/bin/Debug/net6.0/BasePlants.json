@@ -1,0 +1,29 @@
+[
+  {
+    "ID": 0,
+    "StagelessTextureName": "Base_Nickel_Bush",
+    "StageAmount": 5,
+    "EachStageDuration": 20,
+    "Name": "Bush o' Nickel",
+    "InteractToolType": 2,
+    "ItemIDOnHarvest": 0
+  },
+  {
+    "ID": 1,
+    "StagelessTextureName": "Base_Regular_Tree",
+    "StageAmount": 8,
+    "EachStageDuration": 20,
+    "Name": "Regular Tree",
+    "InteractToolType": 1,
+    "ItemIDOnHarvest": 1
+  },
+  {
+    "ID": 2,
+    "StagelessTextureName": "Base_Potato_Plant",
+    "StageAmount": 4,
+    "EachStageDuration": 40,
+    "Name": "Potato Plant",
+    "InteractToolType": 4,
+    "ItemIDOnHarvest": 2
+  }
+]
