@@ -3,6 +3,7 @@
     abstract class InteractableResource : Drawable
     {
         public int ID;
+        public string Name;
         public Sprite MainSprite;
         public int Durability;
         public int MaxDurability;
