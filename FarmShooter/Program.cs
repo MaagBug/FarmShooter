@@ -181,6 +181,10 @@ namespace FarmShooter
                     Field[e.X, e.Y] = q;
                 }
             };
+
+            FileStream file = new FileStream("BaseHandhelds.json", FileMode.Open);
+            Handheld.LoadHandhelds(new StreamReader(file).ReadToEnd());
+            file.Dispose();
         }
 
         static void PrepaseMultiPlayer() { }
@@ -203,9 +207,6 @@ namespace FarmShooter
             Sprite UIInventoryItem;
 
             UICanvas.SetPlaneSize((Vector2f)MainWindow.Size);
-
-            FileStream file = new FileStream("test.json", FileMode.Open);
-            Handheld.LoadHandhelds(new StreamReader(file).ReadToEnd());
 
             Player = new Player() { MainEntity = new Entity(Textures["Player"]) { Speed = 500 }};
             Player.Start();
