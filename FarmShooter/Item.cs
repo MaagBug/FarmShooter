@@ -7,6 +7,7 @@
         public int ID;
         public Sprite InventorySprite;
         public string Name;
+        public string ItemType;
 
         public MaterialType Material;
 
@@ -23,11 +24,9 @@
             InventorySprite = new Sprite(inv_text);
         }
 
-        public abstract void Draw(RenderTarget target, RenderStates states);
-
-        public void Draw(RenderTexture texture, RenderStates states) 
+        public virtual void Draw(RenderTarget target, RenderStates states) 
         {
-            texture.Draw(InventorySprite, states);
+            target.Draw(InventorySprite, states);
         }
     }
 }
