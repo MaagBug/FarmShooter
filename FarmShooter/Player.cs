@@ -24,6 +24,7 @@
             target.Draw(CellSelectionMark);
             target.Draw(MainEntity);
             if (CurrentHandheld != null) target.Draw(CurrentHandheld);
+            else if (SelectedItem != null) target.Draw(new Sprite(SelectedItem.InventorySprite) { Position = MainEntity.Sprite.Position });
         }
 
         public void Start() 
@@ -92,7 +93,7 @@
                     switch (((Tool)CurrentHandheld).Type) 
                     {
                         case ToolType.Hoe:
-                            SelectedCell.ID = 4;
+                            if (SelectedCell.ID != 4) SelectedCell.ID = 4;
                             break;
                     }
                 }

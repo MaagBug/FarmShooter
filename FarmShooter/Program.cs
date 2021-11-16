@@ -236,12 +236,17 @@ namespace FarmShooter
 
                 MainWindow.Draw(UICanvas);
 
+                bool item_selected = false;
                 for (int i = 0; i < 8; ++i) 
                 {
                     UIInventoryCell.Position = UIInvenotyBar.Position - UIInvenotyBar.Origin + new Vector2f(100 * i + ((100 - 80) / 2), 10);
 
                     UIInventoryCell.OutlineColor = new Color(160, 160, 160);
-                    if (Player.Inventory[0, i] == Player.SelectedItem) UIInventoryCell.OutlineColor = new Color(200, 200, 200);
+                    if (Player.Inventory[0, i] == Player.SelectedItem && !item_selected)
+                    {
+                        UIInventoryCell.OutlineColor = new Color(200, 200, 200);
+                        item_selected = true;
+                    }
 
                     MainWindow.Draw(UIInventoryCell);
 
