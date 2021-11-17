@@ -29,12 +29,10 @@
 
         public void Start() 
         {
-            Handle = new ImagePoint() { Point = new Vector2f(25, 25) };
+            Handle = new ImagePoint() { Point = new Vector2f(25, 0) };
             Inventory[0, 0] = new Tool(0) { Owner = this };
             Inventory[0, 1] = new Tool(1) { Owner = this };
             Inventory[0, 2] = new Tool(2) { Owner = this };
-
-            SelectedItem = Inventory[0, 0];
         }
 
         public void Update() 
@@ -59,6 +57,7 @@
             }
 
             MainEntity.Sprite.Position += new Vector2f(horiz_input, vert_input).Normalized() * MainEntity.Speed * Program.MainWindow.DeltaTime.AsSeconds();
+            Handle.Angle = MathF.Atan2(Program.TrueMousePosition.Y - MainEntity.Sprite.Position.Y, Program.TrueMousePosition.X - MainEntity.Sprite.Position.X) * (180 / 3.14F);
 
             CellSelectionMark.OutlineColor = new Color(255, 255, 255, 0);
 

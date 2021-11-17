@@ -25,7 +25,8 @@
         {
             ID = id;
             MainSprite = new Sprite(text);
-            MainSprite.Origin = new Vector2f(30, 53);
+            //MainSprite.Origin = new Vector2f(30, 53);
+            MainSprite.Origin = (Vector2f)(MainSprite.Texture.Size / 2);
         }
 
         public abstract void Update();

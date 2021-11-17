@@ -25,7 +25,10 @@
 
         public override void Update()
         {
-            MainSprite.Position = Owner.Handle.GetImagePoint(Owner.MainEntity.Sprite.Position, 0);
+            MainSprite.Position = Owner.Handle.GetImagePoint(Owner.MainEntity.Sprite.Position);
+            MainSprite.Rotation = MathF.Atan2(Program.TrueMousePosition.Y - Owner.MainEntity.Sprite.Position.Y, Program.TrueMousePosition.X - Owner.MainEntity.Sprite.Position.X) * (180 / 3.14F);
+            if (MathF.Abs(MainSprite.Rotation) > 90) MainSprite.Scale = new Vector2f(1, -1);
+            else MainSprite.Scale = new Vector2f(1, 1);
         }
 
         public void Interact(InteractableResource res) 
