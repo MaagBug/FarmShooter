@@ -1,0 +1,37 @@
+[
+  {
+    "ID": 0,
+    "InventoryTextureName": "Base_NickelBushPiece",
+    "Name": "Nickel-rich Stem Piece",
+    "ItemTags": [ "Organic", "Metal", "Ore" ],
+    "Stackable": true
+  },
+  {
+    "ID": 1,
+    "InventoryTextureName": "Base_NickelBushSeed",
+    "Name": "Nickel Bush Seed",
+    "ItemTags": [ "Organic", "Seed", "Metal" ],
+    "Stackable": true
+  },
+  {
+    "ID": 2,
+    "InventoryTextureName": "Base_WoodTrunk",
+    "Name": "Wood Trunk",
+    "ItemTags": [ "Organic", "Wood" ],
+    "Stackable": true
+  },
+  {
+    "ID": 3,
+    "InventoryTextureName": "Base_RegularTreeSeed",
+    "Name": "Nickel Bush Seed",
+    "ItemTags": [ "Organic", "Seed" ],
+    "Stackable": true
+  },
+  {
+    "ID": 4,
+    "InventoryTextureName": "Base_RawPotato",
+    "Name": "Raw Potato",
+    "ItemTags": [ "Organic", "Food", "Raw" ],
+    "Stackable": true
+  }
+]
