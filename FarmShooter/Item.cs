@@ -1,15 +1,11 @@
 ﻿namespace FarmShooter
 {
-    enum MaterialType { Wood, Stone, Iron, None }
-
     abstract class Item : Drawable
     {
         public int ID;
         public Sprite InventorySprite;
         public string Name;
-        public string ItemType;
-
-        public MaterialType Material;
+        public List<string> ItemTags;
 
         public int Quantity;
 
