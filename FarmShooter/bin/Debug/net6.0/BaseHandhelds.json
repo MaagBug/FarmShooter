@@ -2,9 +2,9 @@
   {
     "ID": 0,
     "HandheldType": "Tool",
-    "TextureName": "Base_Axe_Iron",
-    "InventoryTextureName": "Base_Axe_Iron_Inventory",
-    "Name": "Iron Axe",
+    "TextureName": "Base_MetalAxe",
+    "InventoryTextureName": "Base_MetalAxe_Inventory",
+    "Name": "Metal Axe",
     "Material": 2,
     "Type": 1,
     "Efficiency": 30
@@ -12,9 +12,9 @@
   {
     "ID": 1,
     "HandheldType": "Tool",
-    "TextureName": "Base_Hoe_Iron",
-    "InventoryTextureName": "Base_Hoe_Iron_Inventory",
-    "Name": "Iron Hoe",
+    "TextureName": "Base_MetalHoe",
+    "InventoryTextureName": "Base_MetalHoe_Inventory",
+    "Name": "Metal Hoe",
     "Material": 2,
     "Type": 0,
     "Efficiency": 30
@@ -22,9 +22,9 @@
   {
     "ID": 2,
     "HandheldType": "Tool",
-    "TextureName": "Base_Pickaxe_Iron",
-    "InventoryTextureName": "Base_Pickaxe_Iron_Inventory",
-    "Name": "Iron Pickaxe",
+    "TextureName": "Base_MetalPickaxe",
+    "InventoryTextureName": "Base_MetalPickaxe_Inventory",
+    "Name": "Metal Pickaxe",
     "Material": 2,
     "Type": 2,
     "Efficiency": 30
