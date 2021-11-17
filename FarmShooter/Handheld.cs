@@ -12,7 +12,7 @@
                 if ((string)table.Rows[i].ItemArray[1] == "Tool")
                 {
                     var row = table.Rows[i];
-                    AllHandhelds.Add(new Tool((int)(long)row.ItemArray[0], (string)row.ItemArray[4], Program.Textures[(string)row.ItemArray[2]], Program.Textures[(string)row.ItemArray[3]], (ToolType)(long)row.ItemArray[6]) { Material = (MaterialType)(long)row.ItemArray[5], Efficiency = (int)(long)row.ItemArray[7] });
+                    AllHandhelds.Add(new Tool((int)(long)row.ItemArray[0], (string)row.ItemArray[4], Program.Textures[(string)row.ItemArray[2]], Program.Textures[(string)row.ItemArray[3]], (ToolType)(long)row.ItemArray[6]) { Efficiency = (int)(long)row.ItemArray[7] });
                 }
             }
         }
