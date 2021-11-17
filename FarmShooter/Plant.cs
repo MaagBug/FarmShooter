@@ -18,7 +18,10 @@
                     stages.Add(Program.Textures[(string)row.ItemArray[1] + "_Stage_" + t.ToString()]);
                 }
 
-                AllPlants.Add(new Plant((int)(long)row.ItemArray[0], stages, (int)(long)row.ItemArray[2], 100, (ToolType)(long)row.ItemArray[5], (string)row.ItemArray[4]));
+                AllPlants.Add
+                    (
+                    new Plant((int)(long)row.ItemArray[0], stages, (int)(long)row.ItemArray[2], 100, (ToolType)(long)row.ItemArray[5], (string)row.ItemArray[4])
+                    );
             }
         }
 
@@ -35,9 +38,10 @@
         private int _Stage = 0;
 
         public int MaxStage;
-        public readonly Item HarvestResource;
+        public Item HarvestResource;
+        public Item HarvestSeed;
 
-        List<Texture> StagesTextures;
+        public List<Texture> StagesTextures;
 
         public Plant(int ID, List<Texture> stages, int max_stages, int max_durability, ToolType type, string name) 
         {
