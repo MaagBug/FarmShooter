@@ -33,5 +33,12 @@
     "Name": "Raw Potato",
     "ItemTags": [ "Organic", "Food", "Raw" ],
     "Stackable": true
+  },
+  {
+    "ID": 5,
+    "InventoryTextureName": "Base_PotatoPlantSeed",
+    "Name": "Potato Plant Seed",
+    "ItemTags": [ "Organic", "Seed" ],
+    "Stackable": true
   }
 ]
