@@ -33,6 +33,11 @@
             Inventory[0, 0] = new Tool(0) { Owner = this };
             Inventory[0, 1] = new Tool(1) { Owner = this };
             Inventory[0, 2] = new Tool(2) { Owner = this };
+            Inventory[0, 3] = new Item(0);
+            Inventory[0, 4] = new Item(1);
+            Inventory[0, 5] = new Item(2);
+            Inventory[0, 6] = new Item(3);
+            Inventory[0, 7] = new Item(4);
         }
 
         public void Update() 
@@ -52,6 +57,8 @@
                 {
                     SelectedItem = Inventory[0, i];
                     if (SelectedItem is Handheld) CurrentHandheld = SelectedItem as Handheld;
+                    else CurrentHandheld = null;
+
                     break;
                 }
             }
