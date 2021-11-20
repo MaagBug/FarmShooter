@@ -5,13 +5,14 @@
         public static List<Handheld> AllHandhelds = new List<Handheld>();
         public static void LoadHandhelds(string json) 
         {
+            AllHandhelds.Clear();
+
             DataTable table = JsonConvert.DeserializeObject<DataTable>(json);
 
-            for (int i = 0; i < table.Rows.Count; ++i) 
+            foreach(DataRow row in table.Rows)
             {
-                if ((string)table.Rows[i].ItemArray[1] == "Tool")
+                if ((string)row.ItemArray[1] == "Tool")
                 {
-                    var row = table.Rows[i];
                     AllHandhelds.Add(new Tool((int)(long)row.ItemArray[0], (string)row.ItemArray[4], Program.Textures[(string)row.ItemArray[2]], Program.Textures[(string)row.ItemArray[3]], (ToolType)(long)row.ItemArray[6]) { Efficiency = (int)(long)row.ItemArray[7] });
                 }
             }

@@ -6,12 +6,12 @@
 
         public static void LoadPlants(string json) 
         {
+            AllPlants.Clear();
+
             DataTable table = JsonConvert.DeserializeObject<DataTable>(json);
 
-            for (int i = 0; i < table.Rows.Count; ++i) 
+            foreach(DataRow row in table.Rows) 
             {
-                var row = table.Rows[i];
-
                 List<Texture> stages = new List<Texture>();
                 for (int t = 0; t < (int)(long)row.ItemArray[2]; ++t) 
                 {
@@ -40,6 +40,8 @@
         public int MaxStage;
         public Item HarvestResource;
         public Item HarvestSeed;
+
+        public Item PlantSeed;
 
         public List<Texture> StagesTextures;
 
