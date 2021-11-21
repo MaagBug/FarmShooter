@@ -186,9 +186,9 @@ namespace FarmShooter
             Handheld.LoadHandhelds(new StreamReader(file).ReadToEnd());
             file.Dispose();
 
-            //file = new FileStream("BasePlants.json", FileMode.Open);
-            //Plant.LoadPlants(new StreamReader(file).ReadToEnd());
-            //file.Dispose();
+            file = new FileStream("BasePlants.json", FileMode.Open);
+            Plant.LoadPlants(new StreamReader(file).ReadToEnd());
+            file.Dispose();
 
             file = new FileStream("BaseItems.json", FileMode.Open);
             Item.LoadItems(new StreamReader(file).ReadToEnd());
