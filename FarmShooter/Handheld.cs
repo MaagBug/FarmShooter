@@ -13,7 +13,7 @@
             {
                 if ((string)row.ItemArray[1] == "Tool")
                 {
-                    AllHandhelds.Add(new Tool((int)(long)row.ItemArray[0], (string)row.ItemArray[4], Program.Textures[(string)row.ItemArray[2]], Program.Textures[(string)row.ItemArray[3]], (ToolType)(long)row.ItemArray[6]) { Efficiency = (int)(long)row.ItemArray[7] });
+                    AllHandhelds.Add(new Tool((int)(long)row.ItemArray[0], (string)row.ItemArray[4], Program.Textures.GetValueOrSpecificDefault((string)row.ItemArray[2], Program.Textures["MISSING_TEXTURE"]), Program.Textures.GetValueOrSpecificDefault((string)row.ItemArray[3], Program.Textures["MISSING_TEXTURE"]), (ToolType)(long)row.ItemArray[6]) { Efficiency = (int)(long)row.ItemArray[7] });
                 }
             }
         }

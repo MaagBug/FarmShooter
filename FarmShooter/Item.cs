@@ -12,7 +12,7 @@
 
             foreach (DataRow row in table.Rows) 
             {
-                Item added = new Item((string)row.ItemArray[2], Program.Textures[(string)row.ItemArray[1]]) { ID = (int)(long)row.ItemArray[0], ItemTags = ((string[])row.ItemArray[3]).ToList() };
+                Item added = new Item((string)row.ItemArray[2], Program.Textures.GetValueOrSpecificDefault((string)row.ItemArray[1], Program.Textures["MISSING_TEXTURE"])) { ID = (int)(long)row.ItemArray[0], ItemTags = ((string[])row.ItemArray[3]).ToList() };
                 if ((bool)row.ItemArray[4]) added.Quantity = 1;
                 else added.Quantity = 0;
 

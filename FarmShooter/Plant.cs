@@ -15,7 +15,7 @@
                 List<Texture> stages = new List<Texture>();
                 for (int t = 0; t < (int)(long)row.ItemArray[2]; ++t) 
                 {
-                    stages.Add(Program.Textures[(string)row.ItemArray[1] + "_Stage_" + t.ToString()]);
+                    stages.Add(Program.Textures.GetValueOrSpecificDefault((string)row.ItemArray[1] + "_Stage_" + t.ToString(), Program.Textures["MISSING_TEXTURE"]));
                 }
 
                 AllPlants.Add
