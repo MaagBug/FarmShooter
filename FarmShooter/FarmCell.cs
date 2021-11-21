@@ -12,6 +12,7 @@
         public void Plant(int plant_id) 
         {
             PlantedPlant = new Plant(plant_id);
+            PlantedPlant.MainSprite.Position = MainSprite.Position + new Vector2f(50, 70);
         }
 
         public override void Draw(RenderTarget target, RenderStates states)
