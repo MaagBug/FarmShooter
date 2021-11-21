@@ -21,6 +21,7 @@
                 AllPlants.Add
                     (
                     new Plant((int)(long)row.ItemArray[0], stages, (int)(long)row.ItemArray[2], 100, (ToolType)(long)row.ItemArray[5], (string)row.ItemArray[4])
+                    { HarvestResource = new Item((int)(long)row.ItemArray[6]), PlantSeed = new Item((int)(long)row.ItemArray[7]) }
                     );
             }
         }
@@ -30,8 +31,11 @@
             get { return _Stage; }
             set 
             {
-                _Stage = value;
-                MainSprite.Texture = StagesTextures[value];
+                if (value < MaxStage)
+                {
+                    _Stage = value;
+                    MainSprite.Texture = StagesTextures[value];
+                }
             }
         }
 
@@ -39,8 +43,6 @@
 
         public int MaxStage;
         public Item HarvestResource;
-        public Item HarvestSeed;
-
         public Item PlantSeed;
 
         public List<Texture> StagesTextures;
