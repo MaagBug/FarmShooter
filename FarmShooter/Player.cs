@@ -92,15 +92,25 @@
 
             if (CurrentHandheld != null) CurrentHandheld.Update();
 
-            if (Mouse.IsButtonPressed(Mouse.Button.Left) && SelectedCell != null) 
+            if (Mouse.IsButtonPressed(Mouse.Button.Left) && SelectedItem != null) 
             {
-                if (CurrentHandheld != null && CurrentHandheld is Tool) 
+                if (SelectedItem is Handheld)
                 {
-                    switch (((Tool)CurrentHandheld).Type) 
+                    if (CurrentHandheld is Tool tool && SelectedCell != null)
                     {
-                        case ToolType.Hoe:
-                            if (SelectedCell.ID != 4) SelectedCell.ID = 4;
-                            break;
+                        switch (tool.Type)
+                        {
+                            case ToolType.Hoe:
+                                if (SelectedCell.ID != 4) SelectedCell.ID = 4;
+                                break;
+                        }
+                    }
+                }
+                else if (SelectedCell != null) 
+                {
+                    if (SelectedItem.ItemTags.Contains("Seed") && SelectedCell is FarmCell cell) 
+                    {
+                        cell.Plant(Plant.AllPlants.Find(x => x.PlantSeed.ID == SelectedItem.ID).ID);
                     }
                 }
             }
