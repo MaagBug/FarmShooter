@@ -14,7 +14,7 @@
         public bool Paused = false;
 
         public RectangleShape CellSelectionMark = new RectangleShape() { OutlineThickness = 9, OutlineColor = new Color(255, 255, 255), FillColor = new Color(0, 0, 0, 0) };
-        public Cell SelectedCell;
+        public object SelectedObject;
 
         public Handheld CurrentHandheld;
         public ImagePoint Handle;
@@ -68,25 +68,55 @@
 
             CellSelectionMark.OutlineColor = new Color(255, 255, 255, 0);
 
-            foreach (var tile in Program.Field)
+            if (CurrentHandheld is Tool || (SelectedItem != null && SelectedItem.ItemTags.Contains("Seed")))
             {
-                if (tile.MainSprite.GetGlobalBounds().Contains(Program.TrueMousePosition.X, Program.TrueMousePosition.Y))
+                if ((CurrentHandheld is Tool tool && tool.Type == ToolType.Hoe) || SelectedItem.ItemTags.Contains("Seed"))
                 {
-                    CellSelectionMark.Position = tile.MainSprite.Position;
-                    CellSelectionMark.Size = (Vector2f)tile.MainSprite.Texture.Size;
+                    foreach (var tile in Program.Field)
+                    {
+                        if (tile.MainSprite.GetGlobalBounds().Contains(Program.TrueMousePosition.X, Program.TrueMousePosition.Y))
+                        {
+                            CellSelectionMark.Position = tile.MainSprite.Position;
+                            CellSelectionMark.Size = new Vector2f(tile.MainSprite.GetLocalBounds().Width, tile.MainSprite.GetLocalBounds().Height);
 
-                    if ((tile.MainSprite.Position + (Vector2f)tile.MainSprite.Texture.Size / 2 - MainEntity.Sprite.Position).Length() <= 400)
-                    {
-                        CellSelectionMark.OutlineColor = new Color(255, 255, 255, 255);
-                        SelectedCell = tile;
+                            if ((tile.MainSprite.Position + (Vector2f)tile.MainSprite.Texture.Size / 2 - MainEntity.Sprite.Position).Length() <= 400)
+                            {
+                                CellSelectionMark.OutlineColor = new Color(255, 255, 255, 255);
+                                SelectedObject = tile;
+                            }
+                            else
+                            {
+                                CellSelectionMark.OutlineColor = new Color(130, 130, 130, 190);
+                                SelectedObject = null;
+                            }
+
+                            break;
+                        }
                     }
-                    else
+                }
+                else 
+                {
+                    foreach (var ir in Program.interactableResources) 
                     {
-                        CellSelectionMark.OutlineColor = new Color(130, 130, 130, 190);
-                        SelectedCell = null;
+                        if (ir.MainSprite.GetGlobalBounds().Contains(Program.TrueMousePosition.X, Program.TrueMousePosition.Y)) 
+                        {
+                            CellSelectionMark.Position = new Vector2f(ir.MainSprite.GetGlobalBounds().Left, ir.MainSprite.GetGlobalBounds().Top);
+                            CellSelectionMark.Size = new Vector2f(ir.MainSprite.GetGlobalBounds().Width, ir.MainSprite.GetGlobalBounds().Height);
+
+                            if ((ir.MainSprite.Position + (Vector2f)ir.MainSprite.Texture.Size / 2 - MainEntity.Sprite.Position).Length() <= 400)
+                            {
+                                CellSelectionMark.OutlineColor = new Color(255, 255, 255, 255);
+                                SelectedObject = ir;
+                            }
+                            else
+                            {
+                                CellSelectionMark.OutlineColor = new Color(130, 130, 130, 190);
+                                SelectedObject = null;
+                            }
+
+                            break;
+                        }
                     }
-                    
-                    break;
                 }
             }
 
@@ -94,23 +124,15 @@
 
             if (Mouse.IsButtonPressed(Mouse.Button.Left) && SelectedItem != null) 
             {
-                if (SelectedItem is Handheld)
+                if (SelectedObject != null) 
                 {
-                    if (CurrentHandheld is Tool tool && SelectedCell != null)
+                    if (CurrentHandheld is Tool cur_tool && cur_tool.Type == ToolType.Hoe)
                     {
-                        switch (tool.Type)
-                        {
-                            case ToolType.Hoe:
-                                if (SelectedCell.ID != 4) SelectedCell.ID = 4;
-                                break;
-                        }
+                        if (((Cell)SelectedObject).ID != 4) ((Cell)SelectedObject).ID = 4;
                     }
-                }
-                else if (SelectedCell != null) 
-                {
-                    if (SelectedItem.ItemTags.Contains("Seed") && SelectedCell is FarmCell cell) 
+                    else if (SelectedItem.ItemTags.Contains("Seed")) 
                     {
-                        cell.Plant(Plant.AllPlants.Find(x => x.PlantSeed.ID == SelectedItem.ID).ID);
+                        if (((Cell)SelectedObject).ID == 4) ((FarmCell)SelectedObject).Plant(Plant.AllPlants.Find(x => x.PlantSeed.ID == SelectedItem.ID).ID);
                     }
                 }
             }
