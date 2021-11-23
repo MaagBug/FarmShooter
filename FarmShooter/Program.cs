@@ -32,6 +32,7 @@ namespace FarmShooter
 
         public static int[,,] Map = new int[3, 20, 20];
         public static Cell[,] Field = new Cell[20, 20];
+        public static List<InteractableResource> interactableResources = new List<InteractableResource>();
         public static Player Player;
 
         public static float Zoom = 1;
@@ -243,8 +244,6 @@ namespace FarmShooter
                 MainWindow.SetView(UIView);
 
                 MainWindow.Draw(UICanvas);
-
-                MainWindow.Draw(new Text() {Font = (Font)OtherResources["NeutralFace-Bold"], DisplayedString = Player.Handle.Angle.ToString() });
 
                 bool item_selected = false;
                 for (int i = 0; i < 8; ++i) 
