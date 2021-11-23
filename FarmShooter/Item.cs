@@ -23,7 +23,7 @@
         public int ID;
         public Sprite InventorySprite;
         public string Name;
-        public List<string> ItemTags;
+        public List<string> ItemTags = new List<string>();
 
         public int Quantity;
 
