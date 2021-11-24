@@ -10,12 +10,15 @@ global using BasicSFMLUI;
 global using System.Linq;
 global using Newtonsoft.Json;
 global using System.Data;
+global using System.Threading;
 
 namespace FarmShooter
 {
     class Program
     {
         public static Socket MainSocket;
+        public static List<Player> OtherPlayers;
+        public static Timer ServerTickTimer;
 
         public static List<Keyboard.Key> NumKeys = new List<Keyboard.Key> { Keyboard.Key.Num1, Keyboard.Key.Num2, Keyboard.Key.Num3, Keyboard.Key.Num4, Keyboard.Key.Num5, Keyboard.Key.Num6, Keyboard.Key.Num7, Keyboard.Key.Num8, Keyboard.Key.Num9, };
 
@@ -196,7 +199,7 @@ namespace FarmShooter
             file.Dispose();
         }
 
-        static void PrepaseMultiPlayer() { }
+        static void PrepareMultiPlayer() { }
 
         static void MainGameScreen() 
         {
@@ -267,6 +270,7 @@ namespace FarmShooter
                         };
 
                         MainWindow.Draw(UIInventoryItem);
+                        if (Player.Inventory[0, i].Quantity != 0) MainWindow.Draw(new Text() { Font = (Font)OtherResources["NeutralFace-Bold"], DisplayedString = Player.Inventory[0, i].Quantity.ToString(), Position = UIInventoryItem.Position + new Vector2f(47, 40), CharacterSize = 20 });
                     }
                 }
 
