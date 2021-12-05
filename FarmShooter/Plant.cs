@@ -39,7 +39,7 @@
             }
         }
 
-        private int _Stage = 0;
+        private int _Stage;
 
         public int MaxStage;
         public Item HarvestResource;
@@ -62,6 +62,8 @@
 
             StagesTextures = stages;
             MaxStage = max_stages;
+
+            _Stage = max_stages - 1;
         }
 
         public Plant(int ID) 
@@ -88,7 +90,17 @@
 
         public override void Interact(Tool tool)
         {
-            throw new NotImplementedException();
+            if (tool != null) 
+            {
+                if (InteractToolType == tool.Type) Durability -= tool.Efficiency;
+                else if (InteractToolType == ToolType.Any) Durability -= 10;
+
+                if (Durability <= 0) 
+                {
+                    Program.InteractableResources.Remove(this);
+                    //if (Stage == MaxStage - 1) ;
+                }
+            }
         }
     }
 }

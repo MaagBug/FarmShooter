@@ -5,8 +5,8 @@
         public int ID;
         public string Name;
         public Sprite MainSprite;
-        public int Durability;
-        public int MaxDurability;
+        public float Durability;
+        public float MaxDurability;
 
         public ToolType InteractToolType;
 
