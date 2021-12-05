@@ -18,9 +18,11 @@ namespace FarmShooter
     {
         public static Socket MainSocket;
         public static List<Player> OtherPlayers;
-        public static Timer ServerTickTimer;
 
-        public static List<Keyboard.Key> NumKeys = new List<Keyboard.Key> { Keyboard.Key.Num1, Keyboard.Key.Num2, Keyboard.Key.Num3, Keyboard.Key.Num4, Keyboard.Key.Num5, Keyboard.Key.Num6, Keyboard.Key.Num7, Keyboard.Key.Num8, Keyboard.Key.Num9, };
+        public static int[,,] Map = new int[3, 20, 20];
+        public static Cell[,] Field = new Cell[20, 20];
+        public static List<InteractableResource> InteractableResources = new List<InteractableResource>();
+        public static Player Player;
 
         public static DTRenderWindow MainWindow = new DTRenderWindow(new VideoMode(1200, 800), "test");
         public static View MainView = new View(new FloatRect(0, 0, MainWindow.Size.X, MainWindow.Size.Y));
@@ -28,17 +30,12 @@ namespace FarmShooter
 
         public static Canvas UICanvas = new Canvas();
 
+        public static List<Keyboard.Key> NumKeys = new List<Keyboard.Key> { Keyboard.Key.Num1, Keyboard.Key.Num2, Keyboard.Key.Num3, Keyboard.Key.Num4, Keyboard.Key.Num5, Keyboard.Key.Num6, Keyboard.Key.Num7, Keyboard.Key.Num8, Keyboard.Key.Num9, };
         public static Dictionary<string, Texture> Textures = new Dictionary<string, Texture>();
         public static Dictionary<string, object> OtherResources = new Dictionary<string, object>();
 
-        public static Vector2f TrueMousePosition;
-
-        public static int[,,] Map = new int[3, 20, 20];
-        public static Cell[,] Field = new Cell[20, 20];
-        public static List<InteractableResource> interactableResources = new List<InteractableResource>();
-        public static Player Player;
-
         public static float Zoom = 1;
+        public static Vector2f TrueMousePosition;
 
         static void LoadTexturesAndResources() 
         {
@@ -199,7 +196,11 @@ namespace FarmShooter
             file.Dispose();
         }
 
-        static void PrepareMultiPlayer() { }
+        static void PrepareMultiPlayer() 
+        {
+            Field = new Cell[0, 0];
+            InteractableResources = new List<InteractableResource>();
+        }
 
         static void MainGameScreen() 
         {
@@ -239,6 +240,14 @@ namespace FarmShooter
                     if (tile.MainSprite.GetGlobalBounds().Intersects(new FloatRect(MainView.Center - MainView.Size / 2, MainView.Size)))
                     {
                         MainWindow.Draw(tile);
+                    }
+                }
+
+                foreach (var ir in InteractableResources) 
+                {
+                    if (ir.MainSprite.GetGlobalBounds().Intersects(new FloatRect(MainView.Center - MainView.Size / 2, MainView.Size)))
+                    {
+                        MainWindow.Draw(ir);
                     }
                 }
 

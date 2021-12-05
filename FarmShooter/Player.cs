@@ -40,7 +40,7 @@
             Inventory[0, 7] = new Item(4);
         }
 
-        public void Update() 
+        public void Update()
         {
             int vert_input = 0;
             int horiz_input = 0;
@@ -53,7 +53,7 @@
 
             for (int i = 0; i < 9; ++i)
             {
-                if (Keyboard.IsKeyPressed(Program.NumKeys[i])) 
+                if (Keyboard.IsKeyPressed(Program.NumKeys[i]))
                 {
                     SelectedItem = Inventory[0, i];
                     if (SelectedItem is Handheld) CurrentHandheld = SelectedItem as Handheld;
@@ -68,69 +68,70 @@
 
             CellSelectionMark.OutlineColor = new Color(255, 255, 255, 0);
 
-            if (CurrentHandheld is Tool || (SelectedItem != null && SelectedItem.ItemTags.Contains("Seed")))
+            if ((CurrentHandheld is Tool tool && tool.Type == ToolType.Hoe) || (SelectedItem != null && SelectedItem.ItemTags.Contains("Seed")))
             {
-                if ((CurrentHandheld is Tool tool && tool.Type == ToolType.Hoe) || SelectedItem.ItemTags.Contains("Seed"))
+                foreach (var tile in Program.Field)
                 {
-                    foreach (var tile in Program.Field)
+                    if (tile.MainSprite.GetGlobalBounds().Contains(Program.TrueMousePosition.X, Program.TrueMousePosition.Y))
                     {
-                        if (tile.MainSprite.GetGlobalBounds().Contains(Program.TrueMousePosition.X, Program.TrueMousePosition.Y))
+                        CellSelectionMark.Position = tile.MainSprite.Position;
+                        CellSelectionMark.Size = new Vector2f(tile.MainSprite.GetLocalBounds().Width, tile.MainSprite.GetLocalBounds().Height);
+
+                        if ((tile.MainSprite.Position + (Vector2f)tile.MainSprite.Texture.Size / 2 - MainEntity.Sprite.Position).Length() <= 400)
                         {
-                            CellSelectionMark.Position = tile.MainSprite.Position;
-                            CellSelectionMark.Size = new Vector2f(tile.MainSprite.GetLocalBounds().Width, tile.MainSprite.GetLocalBounds().Height);
-
-                            if ((tile.MainSprite.Position + (Vector2f)tile.MainSprite.Texture.Size / 2 - MainEntity.Sprite.Position).Length() <= 400)
-                            {
-                                CellSelectionMark.OutlineColor = new Color(255, 255, 255, 255);
-                                SelectedObject = tile;
-                            }
-                            else
-                            {
-                                CellSelectionMark.OutlineColor = new Color(130, 130, 130, 190);
-                                SelectedObject = null;
-                            }
-
-                            break;
+                            CellSelectionMark.OutlineColor = new Color(255, 255, 255, 255);
+                            SelectedObject = tile;
                         }
+                        else
+                        {
+                            CellSelectionMark.OutlineColor = new Color(130, 130, 130, 190);
+                            SelectedObject = null;
+                        }
+
+                        break;
                     }
                 }
-                else 
+            }
+            else
+            {
+                foreach (var ir in Program.InteractableResources)
                 {
-                    foreach (var ir in Program.interactableResources) 
+                    if (ir.MainSprite.GetGlobalBounds().Contains(Program.TrueMousePosition.X, Program.TrueMousePosition.Y))
                     {
-                        if (ir.MainSprite.GetGlobalBounds().Contains(Program.TrueMousePosition.X, Program.TrueMousePosition.Y)) 
+                        CellSelectionMark.Position = new Vector2f(ir.MainSprite.GetGlobalBounds().Left, ir.MainSprite.GetGlobalBounds().Top);
+                        CellSelectionMark.Size = new Vector2f(ir.MainSprite.GetGlobalBounds().Width, ir.MainSprite.GetGlobalBounds().Height);
+
+                        if ((ir.MainSprite.Position + (Vector2f)ir.MainSprite.Texture.Size / 2 - MainEntity.Sprite.Position).Length() <= 400)
                         {
-                            CellSelectionMark.Position = new Vector2f(ir.MainSprite.GetGlobalBounds().Left, ir.MainSprite.GetGlobalBounds().Top);
-                            CellSelectionMark.Size = new Vector2f(ir.MainSprite.GetGlobalBounds().Width, ir.MainSprite.GetGlobalBounds().Height);
-
-                            if ((ir.MainSprite.Position + (Vector2f)ir.MainSprite.Texture.Size / 2 - MainEntity.Sprite.Position).Length() <= 400)
-                            {
-                                CellSelectionMark.OutlineColor = new Color(255, 255, 255, 255);
-                                SelectedObject = ir;
-                            }
-                            else
-                            {
-                                CellSelectionMark.OutlineColor = new Color(130, 130, 130, 190);
-                                SelectedObject = null;
-                            }
-
-                            break;
+                            CellSelectionMark.OutlineColor = new Color(255, 255, 255, 255);
+                            SelectedObject = ir;
                         }
+                        else
+                        {
+                            CellSelectionMark.OutlineColor = new Color(130, 130, 130, 190);
+                            SelectedObject = null;
+                        }
+
+                        break;
                     }
                 }
             }
 
             if (CurrentHandheld != null) CurrentHandheld.Update();
 
-            if (Mouse.IsButtonPressed(Mouse.Button.Left) && SelectedItem != null) 
+            if (Mouse.IsButtonPressed(Mouse.Button.Left) && SelectedItem != null)
             {
-                if (SelectedObject != null) 
+                if (SelectedObject != null)
                 {
-                    if (CurrentHandheld is Tool cur_tool && cur_tool.Type == ToolType.Hoe)
+                    if (CurrentHandheld is Tool cur_tool)
                     {
-                        if (((Cell)SelectedObject).ID != 4) ((Cell)SelectedObject).ID = 4;
+                        if (cur_tool.Type == ToolType.Hoe)
+                        {
+                            if (((Cell)SelectedObject).ID != 4) ((Cell)SelectedObject).ID = 4;
+                        }
+                        else ((InteractableResource)SelectedObject).Interact(cur_tool);
                     }
-                    else if (SelectedItem.ItemTags.Contains("Seed")) 
+                    else if (SelectedItem.ItemTags.Contains("Seed"))
                     {
                         if (((Cell)SelectedObject).ID == 4) ((FarmCell)SelectedObject).Plant(Plant.AllPlants.Find(x => x.PlantSeed.ID == SelectedItem.ID).ID);
                     }
