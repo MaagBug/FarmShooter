@@ -2,20 +2,14 @@
 {
     abstract class Handheld : Item
     {
-        public static List<Handheld> AllHandhelds = new List<Handheld>();
-        public static void LoadHandhelds(string json) 
+        public static Handheld DeserializeHandheld(DataRow row)
         {
-            AllHandhelds.Clear();
-
-            DataTable table = JsonConvert.DeserializeObject<DataTable>(json);
-
-            foreach(DataRow row in table.Rows)
+            if (((string[])row.ItemArray[3]).ToList().Contains("Tool"))
             {
-                if ((string)row.ItemArray[1] == "Tool")
-                {
-                    AllHandhelds.Add(new Tool((int)(long)row.ItemArray[0], (string)row.ItemArray[4], Program.Textures.GetValueOrSpecificDefault((string)row.ItemArray[2], Program.Textures["MISSING_TEXTURE"]), Program.Textures.GetValueOrSpecificDefault((string)row.ItemArray[3], Program.Textures["MISSING_TEXTURE"]), (ToolType)(long)row.ItemArray[6]) { Efficiency = (int)(long)row.ItemArray[7] });
-                }
+                return new Tool((int)(long)row.ItemArray[0], (string)row.ItemArray[2], Program.Textures.GetValueOrSpecificDefault((string)row.ItemArray[5], Program.Textures["MISSING_TEXTURE"]), Program.Textures.GetValueOrSpecificDefault((string)row.ItemArray[1], Program.Textures["MISSING_TEXTURE"]), (ToolType)(long)row.ItemArray[7])
+                { Efficiency = (int)(long)row.ItemArray[8], ItemTags = ((string[])row.ItemArray[3]).ToList() };
             }
+            else return null;
         }
 
         public Sprite MainSprite;
@@ -26,10 +20,20 @@
         {
             ID = id;
             MainSprite = new Sprite(text);
-            //MainSprite.Origin = new Vector2f(30, 53);
             MainSprite.Origin = (Vector2f)(MainSprite.Texture.Size / 2);
         }
 
-        public abstract void Update();
+        public override void Draw(RenderTarget target, RenderStates states)
+        {
+            target.Draw(MainSprite, states);
+        }
+
+        public virtual void Update() 
+        {
+            MainSprite.Position = Owner.Handle.GetImagePoint(Owner.MainEntity.Sprite.Position);
+            MainSprite.Rotation = MathF.Atan2(Program.TrueMousePosition.Y - Owner.MainEntity.Sprite.Position.Y, Program.TrueMousePosition.X - Owner.MainEntity.Sprite.Position.X) * (180 / 3.14F);
+            if (MathF.Abs(MainSprite.Rotation) > 90) MainSprite.Scale = new Vector2f(1, -1);
+            else MainSprite.Scale = new Vector2f(1, 1);
+        }
     }
 }

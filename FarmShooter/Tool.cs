@@ -12,23 +12,10 @@
             Type = type;
         }
 
-        public Tool(int id) : base(id, AllHandhelds[id].Name, AllHandhelds[id].MainSprite.Texture, AllHandhelds[id].InventorySprite.Texture)
+        public Tool(int id) : base(id, ((Tool)AllItems[id]).Name, ((Tool)AllItems[id]).MainSprite.Texture, ((Tool)AllItems[id]).InventorySprite.Texture)
         {
-            Type = ((Tool)AllHandhelds[id]).Type;
-            Efficiency = ((Tool)AllHandhelds[id]).Efficiency;
-        }
-
-        public override void Draw(RenderTarget target, RenderStates states)
-        {
-            target.Draw(MainSprite, states);
-        }
-
-        public override void Update()
-        {
-            MainSprite.Position = Owner.Handle.GetImagePoint(Owner.MainEntity.Sprite.Position);
-            MainSprite.Rotation = MathF.Atan2(Program.TrueMousePosition.Y - Owner.MainEntity.Sprite.Position.Y, Program.TrueMousePosition.X - Owner.MainEntity.Sprite.Position.X) * (180 / 3.14F);
-            if (MathF.Abs(MainSprite.Rotation) > 90) MainSprite.Scale = new Vector2f(1, -1);
-            else MainSprite.Scale = new Vector2f(1, 1);
+            Type = ((Tool)AllItems[id]).Type;
+            Efficiency = ((Tool)AllItems[id]).Efficiency;
         }
 
         public void Interact(InteractableResource res) 

@@ -16,23 +16,25 @@
         public RectangleShape CellSelectionMark = new RectangleShape() { OutlineThickness = 9, OutlineColor = new Color(255, 255, 255), FillColor = new Color(0, 0, 0, 0) };
         public object SelectedObject;
 
-        public Handheld CurrentHandheld;
         public ImagePoint Handle;
 
         public void Draw(RenderTarget target, RenderStates states)
         {
             target.Draw(CellSelectionMark);
             target.Draw(MainEntity);
-            if (CurrentHandheld != null) target.Draw(CurrentHandheld);
-            else if (SelectedItem != null) target.Draw(new Sprite(SelectedItem.InventorySprite) { Position = MainEntity.Sprite.Position });
+            if (SelectedItem != null) 
+            {
+                if(SelectedItem is Handheld held) target.Draw(held);
+                else target.Draw(new Sprite(SelectedItem.InventorySprite) { Position = MainEntity.Sprite.Position });
+            }
         }
 
         public void Start() 
         {
             Handle = new ImagePoint() { Point = new Vector2f(25, 0) };
-            Inventory[0, 0] = new Tool(0) { Owner = this };
-            Inventory[0, 1] = new Tool(1) { Owner = this };
-            Inventory[0, 2] = new Tool(2) { Owner = this };
+            Inventory[0, 0] = new Tool(6) { Owner = this };
+            Inventory[0, 1] = new Tool(7) { Owner = this };
+            Inventory[0, 2] = new Tool(8) { Owner = this };
             Inventory[0, 3] = new Item(0);
             Inventory[0, 4] = new Item(1);
             Inventory[0, 5] = new Item(2);
@@ -56,9 +58,6 @@
                 if (Keyboard.IsKeyPressed(Program.NumKeys[i]))
                 {
                     SelectedItem = Inventory[0, i];
-                    if (SelectedItem is Handheld) CurrentHandheld = SelectedItem as Handheld;
-                    else CurrentHandheld = null;
-
                     break;
                 }
             }
@@ -68,7 +67,7 @@
 
             CellSelectionMark.OutlineColor = new Color(255, 255, 255, 0);
 
-            if ((CurrentHandheld is Tool tool && tool.Type == ToolType.Hoe) || (SelectedItem != null && SelectedItem.ItemTags.Contains("Seed")))
+            if ((SelectedItem is Tool tool && tool.Type == ToolType.Hoe) || (SelectedItem != null && SelectedItem.ItemTags.Contains("Seed")))
             {
                 foreach (var tile in Program.Field)
                 {
@@ -117,13 +116,13 @@
                 }
             }
 
-            if (CurrentHandheld != null) CurrentHandheld.Update();
+            if (SelectedItem is Handheld) ((Handheld)SelectedItem).Update();
 
             if (Mouse.IsButtonPressed(Mouse.Button.Left) && SelectedItem != null)
             {
                 if (SelectedObject != null)
                 {
-                    if (CurrentHandheld is Tool cur_tool)
+                    if (SelectedItem is Tool cur_tool)
                     {
                         if (cur_tool.Type == ToolType.Hoe)
                         {

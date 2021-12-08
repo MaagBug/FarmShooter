@@ -40,5 +40,38 @@
     "Name": "Potato Plant Seed",
     "ItemTags": [ "Organic", "Seed" ],
     "Stackable": true
+  },
+  {
+    "ID": 6,
+    "InventoryTextureName": "Base_MetalAxe_Inventory",
+    "Name": "Metal Axe",
+    "ItemTags": [ "Metal", "Tool", "Handheld" ],
+    "Stackable": false,
+    "TextureName": "Base_MetalAxe",
+    "Material": 2,
+    "Type": 1,
+    "Efficiency": 30
+  },
+  {
+    "ID": 7,
+    "InventoryTextureName": "Base_MetalHoe_Inventory",
+    "Name": "Metal Hoe",
+    "ItemTags": [ "Metal", "Tool", "Handheld" ],
+    "Stackable": false,
+    "TextureName": "Base_MetalHoe",
+    "Material": 2,
+    "Type": 0,
+    "Efficiency": 30
+  },
+  {
+    "ID": 8,
+    "InventoryTextureName": "Base_MetalPickaxe_Inventory",
+    "Name": "Metal Pickaxe",
+    "ItemTags": [ "Metal", "Tool", "Handheld" ],
+    "Stackable": false,
+    "TextureName": "Base_MetalPickaxe",
+    "Material": 2,
+    "Type": 2,
+    "Efficiency": 30
   }
 ]
