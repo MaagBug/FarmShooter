@@ -45,6 +45,15 @@
             Quantity = AllItems[ID].Quantity;
         }
 
+        public Item(Item clone) 
+        {
+            ID = clone.ID;
+            InventorySprite = clone.InventorySprite;
+            Name = clone.Name;
+            ItemTags = clone.ItemTags;
+            Quantity = clone.Quantity;
+        }
+
         public Item(string name, Texture inv_text) 
         {
             Name = name;
