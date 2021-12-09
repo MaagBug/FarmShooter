@@ -16,9 +16,19 @@
 
         public Player Owner;
 
-        public Handheld(int id, string name, Texture text, Texture inv_text) : base(name, inv_text)
+        public Handheld(Handheld copy) : base(copy)
         {
-            ID = id;
+            MainSprite = new Sprite(copy.MainSprite);
+            Owner = copy.Owner;
+        }
+
+        public Handheld(int id) : base(id)
+        {
+            MainSprite = new Sprite(((Handheld)AllItems[id]).MainSprite);
+        }
+
+        public Handheld(int id, string name, Texture text, Texture inv_text) : base(id, name, inv_text)
+        {
             MainSprite = new Sprite(text);
             MainSprite.Origin = (Vector2f)(MainSprite.Texture.Size / 2);
         }
