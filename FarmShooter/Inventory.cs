@@ -16,7 +16,7 @@
             {
                 for (int k = 0; k < 8; ++k)
                 {
-                    if (_Items[i, k].ID == added_item.ID && _Items[i, k].Quantity != 0 && _Items[i, k].Quantity < 65)
+                    if (_Items[i, k] != null && _Items[i, k].ID == added_item.ID && _Items[i, k].Quantity != 0 && _Items[i, k].Quantity < 65)
                     {
                         _Items[i, k].Quantity += added_item.Quantity;
                         if (_Items[i, k].Quantity > 64)
@@ -30,7 +30,8 @@
                     }
                     else if (_Items[i, k] == null)
                     {
-                        _Items[i, k] = new Item(added_item);
+                        if (added_item.ItemTags.Contains("Tool")) _Items[i, k] = new Tool(added_item as Tool);
+                        else _Items[i, k] = new Item(added_item);
 
                         dropped = 0;
 
@@ -45,9 +46,37 @@
             return false;
         }
 
-        //public bool GetItem(int item_id, out Item item) 
-        //{
-            
-        //}
+        public bool GetItem(Item item, int amount, out Item out_item)
+        {
+            for (int i = 0; i < 3; ++i) 
+            {
+                for (int k = 0; k < 8; ++k) 
+                {
+                    if (_Items[i, k].ID == item.ID) 
+                    {
+                        if (_Items[i, k].Quantity == 0)
+                        {
+                            out_item = new Item(_Items[i, k]);
+                            _Items[i, k] = null;
+
+                            return true;
+                        }
+                        else if (_Items[i, k].Quantity >= amount) 
+                        {
+                            out_item = new Item(_Items[i, k]) { Quantity = amount };
+                            _Items[i, k].Quantity -= amount;
+
+                            if(_Items[i, k].Quantity == 0) _Items[i, k] = null;
+
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            out_item = null;
+
+            return false;
+        }
     }
 }
