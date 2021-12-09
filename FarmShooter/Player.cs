@@ -6,7 +6,7 @@
     {
         public Entity MainEntity;
 
-        public Item[,] Inventory = new Item[3, 8];
+        public Inventory Inventory = new Inventory();
         public Item SelectedItem;
 
         public PlayerState State = PlayerState.None;
@@ -32,14 +32,14 @@
         public void Start() 
         {
             Handle = new ImagePoint() { Point = new Vector2f(25, 0) };
-            Inventory[0, 0] = new Tool(6) { Owner = this };
-            Inventory[0, 1] = new Tool(7) { Owner = this };
-            Inventory[0, 2] = new Tool(8) { Owner = this };
-            Inventory[0, 3] = new Item(0);
-            Inventory[0, 4] = new Item(1);
-            Inventory[0, 5] = new Item(2);
-            Inventory[0, 6] = new Item(3);
-            Inventory[0, 7] = new Item(4);
+            Inventory.AddItem(new Tool(6) { Owner = this }, out _);
+            Inventory.AddItem(new Tool(7) { Owner = this }, out _);
+            Inventory.AddItem(new Tool(8) { Owner = this }, out _);
+            Inventory.AddItem(new Item(0), out _);
+            Inventory.AddItem(new Item(1), out _);
+            Inventory.AddItem(new Item(2), out _);
+            Inventory.AddItem(new Item(3), out _);
+            Inventory.AddItem(new Item(4), out _);
         }
 
         public void Update()
