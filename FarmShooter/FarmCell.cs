@@ -9,9 +9,9 @@
             
         }
 
-        public void Plant(int plant_id) 
+        public void Plant(Plant plant) 
         {
-            PlantedPlant = new Plant(plant_id);
+            PlantedPlant = new Plant(plant);
             PlantedPlant.MainSprite.Position = MainSprite.Position + new Vector2f(50, 70);
             Program.InteractableResources.Add(PlantedPlant);
         }

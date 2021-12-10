@@ -132,9 +132,11 @@
                     }
                     else if (SelectedItem.ItemTags.Contains("Seed"))
                     {
-                        if (((Cell)SelectedObject).ID == 4) ((FarmCell)SelectedObject).Plant(Plant.AllPlants.Find(x => x.PlantSeed.ID == SelectedItem.ID).ID);
+                        if (((Cell)SelectedObject).ID == 4 && ((FarmCell)SelectedObject).PlantedPlant == null) ((FarmCell)SelectedObject).Plant(new Plant(Plant.AllPlants.Find(x => x.PlantSeed.ID == SelectedItem.ID)) { PlantedCell = (FarmCell)SelectedObject });
                     }
                 }
+
+                SelectedObject = null;
             }
 
             Program.MainView.Center = MainEntity.Sprite.Position;
