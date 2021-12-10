@@ -4,6 +4,8 @@
     {
         public static List<Plant> AllPlants = new List<Plant>();
 
+        //public Timer GrowTimer;
+
         public static void LoadPlants(string json) 
         {
             AllPlants.Clear();
@@ -45,6 +47,8 @@
         public Item HarvestResource;
         public Item PlantSeed;
 
+        public FarmCell PlantedCell;
+
         public List<Texture> StagesTextures;
 
         public Plant(int ID, List<Texture> stages, int max_stages, int max_durability, ToolType type, string name) 
@@ -62,25 +66,27 @@
 
             StagesTextures = stages;
             MaxStage = max_stages;
-
-            _Stage = max_stages - 1;
         }
 
-        public Plant(int ID) 
+        public Plant(Plant copy) 
         {
-            this.ID = ID;
-            MainSprite = new Sprite(AllPlants[ID].MainSprite);
-            HarvestResource = AllPlants[ID].HarvestResource;
+            ID = copy.ID;
+            MainSprite = new Sprite(copy.MainSprite);
+            HarvestResource = copy.HarvestResource;
 
-            Name = AllPlants[ID].Name;
+            Name = copy.Name;
 
-            MaxDurability = AllPlants[ID].MaxDurability;
-            Durability = AllPlants[ID].Durability;
+            MaxDurability = copy.MaxDurability;
+            Durability = copy.Durability;
 
-            InteractToolType = AllPlants[ID].InteractToolType;
+            InteractToolType = copy.InteractToolType;
 
-            StagesTextures = AllPlants[ID].StagesTextures;
-            MaxStage = AllPlants[ID].MaxStage;
+            StagesTextures = copy.StagesTextures;
+            MaxStage = copy.MaxStage;
+
+            PlantedCell = copy.PlantedCell;
+
+            _Stage = MaxStage - 1;
         }
 
         public override void Draw(RenderTarget target, RenderStates states)
@@ -98,7 +104,12 @@
                 if (Durability <= 0) 
                 {
                     Program.InteractableResources.Remove(this);
-                    //if (Stage == MaxStage - 1) ;
+                    PlantedCell.PlantedPlant = null;
+
+                    if (Stage == MaxStage - 1) 
+                    {
+                        tool.Owner.Inventory.AddItem(new Item(HarvestResource), out _);
+                    }
                 }
             }
         }
