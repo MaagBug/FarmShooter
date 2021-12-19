@@ -1,6 +1,6 @@
 ﻿namespace FarmShooter
 {
-    class Entity : Drawable
+    public class Entity : Drawable
     {
         public Sprite Sprite;
         public float Speed = 0;

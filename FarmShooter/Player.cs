@@ -1,9 +1,11 @@
 ﻿namespace FarmShooter
 {
-    enum PlayerState { None, Paused, Texting, Crafting }
+    public enum PlayerState { None, Paused, Texting, Crafting }
 
-    class Player : Drawable
+    public class Player : Drawable
     {
+        public string Nickname;
+
         public Entity MainEntity;
 
         public Inventory Inventory = new Inventory();

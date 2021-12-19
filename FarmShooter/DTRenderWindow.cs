@@ -1,6 +1,6 @@
 ﻿namespace FarmShooter
 {
-    class DTRenderWindow : RenderWindow
+    public class DTRenderWindow : RenderWindow
     {
         public Time DeltaTime { get; private set; }
         private Clock DeltaTimeClock;

@@ -1,6 +1,6 @@
 ﻿namespace FarmShooter
 {
-    internal class Plant : InteractableResource
+    public class Plant : InteractableResource
     {
         public static List<Plant> AllPlants = new List<Plant>();
 

@@ -1,6 +1,6 @@
 ﻿namespace FarmShooter
 {
-    class FarmCell : Cell
+    public class FarmCell : Cell
     {
         public Plant PlantedPlant;
 

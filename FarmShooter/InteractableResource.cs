@@ -1,6 +1,6 @@
 ﻿namespace FarmShooter
 {
-    abstract class InteractableResource : Drawable
+    public abstract class InteractableResource : Drawable
     {
         public int ID;
         public string Name;

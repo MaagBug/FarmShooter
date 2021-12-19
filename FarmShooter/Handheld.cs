@@ -1,6 +1,6 @@
 ﻿namespace FarmShooter
 {
-    abstract class Handheld : Item
+    public abstract class Handheld : Item
     {
         public static Handheld DeserializeHandheld(DataRow row)
         {

@@ -1,6 +1,6 @@
 ﻿namespace FarmShooter
 {
-    internal class Inventory
+    public class Inventory
     {
         public Item this[int x, int y] 
         {

@@ -1,6 +1,6 @@
 ﻿namespace FarmShooter
 {
-    class Item : Drawable
+    public class Item : Drawable
     {
         public static List<Item> AllItems = new List<Item>();
 

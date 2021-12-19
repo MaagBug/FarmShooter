@@ -1,6 +1,6 @@
 ﻿namespace FarmShooter
 {
-    class Cell : Drawable
+    public class Cell : Drawable
     {
         public static event EventHandler<Vector2i> CellUpdated;
 

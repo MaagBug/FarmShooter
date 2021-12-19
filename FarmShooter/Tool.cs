@@ -1,8 +1,8 @@
 ﻿namespace FarmShooter
 {
-    enum ToolType { Hoe, Axe, Pickaxe, Any };
+    public enum ToolType { Hoe, Axe, Pickaxe, Any };
 
-    class Tool : Handheld
+    public class Tool : Handheld
     {
         public ToolType Type;
         public float Efficiency;

@@ -1,6 +1,6 @@
 ﻿namespace FarmShooter
 {
-    class ImagePoint
+    public class ImagePoint
     {
         public Vector2f Point;
         public float Angle;
